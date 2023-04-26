@@ -1,0 +1,11 @@
+query CATS_ALL {
+  categories {
+    data {
+      id
+      attributes {
+        Name
+        URL
+      }
+    }
+  }
+}

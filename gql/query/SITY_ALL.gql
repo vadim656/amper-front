@@ -1,0 +1,10 @@
+query SITY_ALL {
+  sities {
+    data {
+      id
+      attributes {
+        Name
+      }
+    }
+  }
+}

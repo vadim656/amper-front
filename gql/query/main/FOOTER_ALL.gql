@@ -1,0 +1,29 @@
+query FOOTER_ALL {
+  kategoriiFuters{
+    data{
+      id
+      attributes{
+        Name
+        URL
+      }
+    }
+  }
+  uslugiFuters{
+    data{
+      id
+      attributes{
+        Name
+        URL
+      }
+    }
+  }
+  pomoshhFuters{
+    data{
+      id
+      attributes{
+        Name
+        URL
+      }
+    }
+  }
+}

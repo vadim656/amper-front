@@ -1,0 +1,22 @@
+query SEARCH($NAME: String!) {
+    search(query: $NAME) {
+      products {
+        data {
+          id
+          attributes {
+            Name
+            Price
+            UID
+            Artikul
+            kategorii_tovarovs {
+              data {
+                attributes {
+                  URL
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
