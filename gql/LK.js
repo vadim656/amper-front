@@ -4,6 +4,7 @@ export const ALL_ORDERS = gql`
   query ALL_ORDERS($ID: ID) {
     usersPermissionsUser(id: $ID) {
       data {
+        id
         attributes {
           orders {
             data {
@@ -23,6 +24,7 @@ export const ALL_ORDERS = gql`
                       Value
                       tovary {
                         data {
+                          id
                           attributes {
                             Name
                             Artikul

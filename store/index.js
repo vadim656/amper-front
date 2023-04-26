@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { gql } from "@apollo/client/core"
 
 const queryMe = gql`
   query {
@@ -56,8 +57,8 @@ export const userInfo = defineStore('session', {
     }
   },
   actions: {
-    async registerUser () {
-      const { result: me, onResult } = await useQuery(queryMe)
+     registerUser () {
+      const { result, onResult } = useQuery(queryMe)
 
       onResult(res => {
         this.info = res.data.me

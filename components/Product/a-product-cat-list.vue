@@ -6,7 +6,7 @@
       <img
         v-if="product_data.attributes.Img.data.length"
         :src="
-          $config.public.apiNot + product_data.attributes.Img.data[0].attributes.url
+          runtimeConfig.public.apiNot + product_data.attributes.Img.data[0].attributes.url
         "
         alt=""
         class="rounded-md w-full h-[300px] object-contain opacity-0"
@@ -101,8 +101,9 @@ export default {
     }
   },
   setup () {
+    const runtimeConfig = useRuntimeConfig()
     const cart = useCart()
-    return { cart }
+    return { cart, runtimeConfig }
   },
   methods: {
     addToCart (product) {

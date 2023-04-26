@@ -8,12 +8,13 @@ export default {
   },
   setup () {
     const cart = useCart()
+    const runtimeConfig = useRuntimeConfig()
     const router = useRouter()
     function goToProduct (params) {
       console.log('push product', params.attributes.kategorii_tovarovs.data[0].attributes.URL)
       router.push({ path: '/category/product-' + params.attributes.kategorii_tovarovs.data[0].attributes.URL + '/' + params.id})
     }
-    return { cart, goToProduct }
+    return { cart, goToProduct, runtimeConfig }
   },
   methods: {
     addToCart (product) {
@@ -48,7 +49,7 @@ export default {
         <img
           v-if="product_data.attributes.Img.data.length > 0"
           :src="
-            $config.public.apiNot +
+            runtimeConfig.public.apiNot +
             product_data.attributes.Img.data[0].attributes.url
           "
           alt=""

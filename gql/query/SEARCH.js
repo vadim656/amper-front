@@ -1,4 +1,7 @@
-query SEARCH($NAME: String!) {
+import gql from 'graphql-tag'
+
+export const SEARCH = gql`
+  query SEARCH($NAME: String!) {
     search(query: $NAME) {
       products {
         data {
@@ -10,6 +13,7 @@ query SEARCH($NAME: String!) {
             Artikul
             kategorii_tovarovs {
               data {
+                id
                 attributes {
                   URL
                 }
@@ -20,3 +24,4 @@ query SEARCH($NAME: String!) {
       }
     }
   }
+`

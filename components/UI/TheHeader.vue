@@ -1,20 +1,21 @@
 <script setup>
-import { useSity } from '@/store'
-import { useCart } from '@/store'
-import { userInfo } from '@/store'
+import { useSity, useCart, userInfo } from '@/store'
 import { onClickOutside } from '@vueuse/core'
 import AModal from '../All/a-modal.vue'
 import ACartWrapper from '../Cart/a-cart-wrapper.vue'
-import SITY_ALL from '~/gql/query/SITY_ALL.gql'
-import CATS_ALL from '~/gql/query/CATS_ALL.gql'
+import {SITY_ALL} from '~/gql/query/SITY_ALL.js'
+import {CATS_ALL} from '~/gql/query/CATS_ALL.js'
+
 
 const user = userInfo()
 
 const router = useRouter()
-const { onLogout } = useApollo()
+// const { onLogout } = useApollo()
 
 const { result: sities } = useQuery(SITY_ALL)
 const { result: categories } = useQuery(CATS_ALL)
+
+const categoriesCom = computed(() => categories.value?.data ?? [])
 
 const sity = useSity()
 const cart = useCart()
@@ -57,9 +58,10 @@ const closeCartEmit = () => {
 
 function logout () {
   setTimeout(() => {
-    user.clearSession()
+    console.log('user.clearSession()');
+    
   }, 1000)
-  onLogout()
+  // onLogout()
   router.push('/auth/login')
 }
 </script>
@@ -124,7 +126,8 @@ function logout () {
             <img src="~/assets/img/icons/catalog.svg" alt="" />
             <span class="text-white font-bold">Каталог</span>
           </button>
-          <div
+          <pre>{{ categoriesCom }}</pre>
+          <!-- <div
             ref="catalog"
             v-if="catalogView == true"
             class="absolute top-14 bg-white drop-shadow-md rounded-md z-[99] p-4 w-full overflow-hidden"
@@ -143,7 +146,7 @@ function logout () {
                 }}</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <HeaderASearchWrapper />
 

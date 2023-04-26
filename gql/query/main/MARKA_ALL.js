@@ -1,3 +1,6 @@
+import gql from 'graphql-tag'
+
+export const MARKA_ALL = gql`
 query MARKA_ALL {
   brandsAutos {
     data {
@@ -6,6 +9,7 @@ query MARKA_ALL {
         Name
         IMG {
           data {
+            id
             attributes {
               url
             }
@@ -39,6 +43,7 @@ query MARKA_ALL {
         URL
         IMG {
           data {
+            id
             attributes {
               url
             }
@@ -48,3 +53,6 @@ query MARKA_ALL {
     }
   }
 }
+`
+
+

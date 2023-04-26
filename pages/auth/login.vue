@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <div class="flex flex-col items-center mt-1">
-      <Toast />
-
       <div class="mt-4">
         <div class="flex flex-col gap-4">
           <div class="flex flex-col gap-2">
@@ -51,12 +49,11 @@
 
 <script setup>
 import { userInfo } from '@/store'
-const { onLogin } = useApollo()
+import { gql } from "@apollo/client/core"
 
 
 const store = userInfo()
 
-const isLoading = ref(false)
 const router = useRouter()
 
 const identifier = ref('')
@@ -76,7 +73,7 @@ const { mutate: login, onDone } = useMutation(loginQuery, () => ({
   }
 }))
 onDone(result => {
-  onLogin(result.data.login.jwt)
+  // onLogin(result.data.login.jwt)
   store.registerUser()
   setTimeout(() => {
     router.push('/')

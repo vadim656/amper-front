@@ -1,11 +1,12 @@
 <template>
   <div class="bg-[#E5E5E5]">
     <div class="container py-4 flex justify-between">
-      <div class="flex gap-20">
+      <pre>{{ result }}</pre>
+      <!-- <div class="flex gap-20">
         <div class="flex flex-col gap-4">
           <span class="font-bold">Категории</span>
           <ul class="flex flex-col gap-2">
-            <li v-for="item in data.kategoriiFuters.data" :key="item.id">
+            <li v-for="item in result.kategoriiFuters.data" :key="item.id">
               <NuxtLink
                 :to="`/` + item.attributes.URL"
                 class="text-sm cursor-pointer"
@@ -17,7 +18,7 @@
         <div class="flex flex-col gap-4">
           <span class="font-bold">Услуги</span>
           <ul class="flex flex-col gap-2">
-            <li v-for="item in data.uslugiFuters.data" :key="item.id">
+            <li v-for="item in result.uslugiFuters.data" :key="item.id">
               <NuxtLink
                 :to="`/` + item.attributes.URL"
                 class="text-sm cursor-pointer"
@@ -28,8 +29,8 @@
         </div>
         <div class="flex flex-col gap-4">
           <span class="font-bold">Помощь</span>
-          <ul class="flex flex-col gap-2">
-            <li v-for="item in data.pomoshhFuters.data" :key="item.id">
+          <ul class="flex flex-col gap-2" v-if="result && result.pomoshhFuters">
+            <li v-for="item in result.pomoshhFuters.data" :key="item.id">
               <NuxtLink
                 :to="`/` + item.attributes.URL"
                 class="text-sm cursor-pointer"
@@ -61,15 +62,17 @@
         <div class="text-sm">
           © 2005 – 2022 ООО «Ампер Плюс». Все права защищены.
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
+  
 </template>
 
 <script setup>
-import FOOTER_ALL from '~/gql/query/main/FOOTER_ALL.gql'
+import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
 
-const { data } = await useAsyncQuery(FOOTER_ALL)
+
+const { result } = useQuery(FOOTER_ALL)
 </script>
 
 <style></style>

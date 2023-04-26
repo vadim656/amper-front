@@ -22,47 +22,44 @@ export default defineNuxtConfig({
   css: [
     'primevue/resources/themes/tailwind-light/theme.css',
     'primevue/resources/primevue.css',
-    'primeicons/primeicons.css'
+    'primeicons/primeicons.css',
+    '~/assets/css/tailwind.css'
   ],
-  tailwindcss: {
-    cssPath: '~/assets/css/tailwind.css',
-    configPath: '~/tailwind.config.js'
-  },
-
-  publicRuntimeConfig: {
-    // Keys within public are also exposed client-side
-
-    api: 'https://api.amper-plus.ru/',
-    apiNot: 'https://api.amper-plus.ru',
-    noPhoto:
-      'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg',
-    graphqlURL: 'https://api.amper-plus.ru/graphql',
-    strapiURL: 'https://api.amper-plus.ru'
+  runtimeConfig: {
+    public: {
+      api: 'https://api.amper-plus.ru/',
+      apiNot: 'https://api.amper-plus.ru',
+      noPhoto:
+        'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg',
+      graphqlURL: 'https://api.amper-plus.ru/graphql',
+      strapiURL: 'https://api.amper-plus.ru'
+    }
   },
   pinia: {
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
   },
-  apollo: {
-    autoImports: true,
-    tokenStorage: 'cookie',
-    clients: {
-      default: {
-        httpEndpoint: 'https://api.amper-plus.ru/graphql',
-        httpLinkOptions: {
-          credentials: 'include'
-        }
-      }
-    }
-  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
-    '@nuxtjs/apollo',
     '@pinia-plugin-persistedstate/nuxt',
-    // 'yandex-metrika-module-nuxt3',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxtjs/apollo'
   ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  },
+  tailwindcss: {
+    viewer: false
+  },
+  apollo: {
+    clients: {
+        default: './apollo/default.ts',
+    }
+  },
   build: {
-    transpile: ['primevue', 'ts-invariant/process']
+    transpile: ['primevue']
   }
 })

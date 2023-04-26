@@ -1,3 +1,6 @@
+import gql from 'graphql-tag'
+
+export const CATS_ALL = gql`
 query CATS_ALL {
   categories {
     data {
@@ -9,3 +12,6 @@ query CATS_ALL {
     }
   }
 }
+`
+
+

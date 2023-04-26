@@ -1,6 +1,5 @@
 <script setup>
-import PRODUCTS_ALL from '~/gql/query/category/PRODUCTS_ALL.gql'
-import MARKA_ALL from '~/gql/query/main/MARKA_ALL.gql'
+import { PRODUCTS_ALL } from '~/gql/query/category/PRODUCTS_ALL.js'
 
 const done = ref(false)
 
@@ -58,7 +57,7 @@ const productType = reactive({ val: 'grid' })
 
 //fetch data
 
-let variables = reactive({
+let variables = ref({
   URL: route.params.url,
   PAGE: pageCountValue,
   PAGESIZE: pageSizeValue,
@@ -69,7 +68,9 @@ let variables = reactive({
 //   variables.URL = route.params.url
 // })
 
-const { result: dataProducts } = useQuery(PRODUCTS_ALL, variables)
+const { result: dataProducts } = useQuery(PRODUCTS_ALL, () => {
+  variables.value
+})
 
 //  pagination
 

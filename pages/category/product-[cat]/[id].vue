@@ -1,8 +1,9 @@
 <script setup>
 import { useCart } from '@/store'
-import PRODUCT_ID from '~/gql/query/PRODUCT_ID.gql'
-import PRODUCTS_ALL from '~/gql/query/category/PRODUCTS_ALL.gql'
+import { PRODUCT_ID } from '~/gql/query/PRODUCT_ID.js'
+import { PRODUCTS_ALL } from '~/gql/query/category/PRODUCTS_ALL.js'
 import { useToastStore } from '@/store'
+const runtimeConfig = useRuntimeConfig()
 const toastAdd = useToastStore()
 const route = useRoute()
 
@@ -13,9 +14,7 @@ function addCart (data) {
   toastAdd.AddToast(data.id)
 }
 
-let variables = ref({
-  ID: route.params.id
-})
+
 
 let variables2 = ref({
   URL: route.params.cat,
@@ -37,7 +36,9 @@ let variables2 = ref({
   ]
 })
 
-const { result: product } = useQuery(PRODUCT_ID, variables.value)
+const { result: product } = useQuery(PRODUCT_ID, {
+  ID: route.params.id
+})
 
 const productID = computed(() => {
   if (product.value?.product) {
@@ -68,13 +69,13 @@ const productsID = computed(() => {
       <div class="col-span-3">
         <img
           v-if="productID.attributes.Img.data.length == 0"
-          :src="$config.public.noPhoto"
+          :src="runtimeConfig.public.noPhoto"
           alt=""
         />
         <img
           v-else
           :src="
-            $config.public.apiNot +
+            runtimeConfig.public.apiNot +
             productID.attributes.Img.data[0].attributes.url
           "
           alt=""

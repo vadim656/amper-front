@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(['catalog'])
+const runtimeConfig = useRuntimeConfig()
 </script>
 <template>
   <div class="container flex flex-col gap-8">
@@ -16,7 +17,7 @@ const props = defineProps(['catalog'])
         <img
           v-if="item.attributes.IMG.data"
           :src="
-            $config.apiNot + + item.attributes.IMG.data.attributes.url
+          runtimeConfig.public.apiNot + + item.attributes.IMG.data.attributes.url
           "
           alt=""
           class="w-[80px] h-auto"

@@ -1,22 +1,27 @@
+<script setup>
+const runtimeConfig = useRuntimeConfig()
+const props = defineProps(['data'])
+</script>
 <template>
   <div class="flex gap-2 border-b-[1px] border-neutral-big/50 py-3">
     <div class="flex items-center justify-between gap-2 w-full">
       <img
-        v-if="data.attributes.Img.data.length == 0"
-        :src="$config.public.noPhoto"
+        v-if="props.data.attributes.Img.data.length == 0"
+        :src="runtimeConfig.public.noPhoto"
         alt=""
         class="w-full max-w-[80px] h-auto object-cover"
       />
       <img
         v-else
         :src="
-          $config.public.apiNot + data.attributes.Img.data[0].attributes.url
+          runtimeConfig.public.apiNot +
+          props.data.attributes.Img.data[0].attributes.url
         "
         alt=""
         class="w-full max-w-[80px] h-auto object-cover"
       />
       <span class="text-xs cursor-pointer font-semibold">{{
-        data.attributes.Name
+        props.data.attributes.Name
       }}</span>
       <button class="pl-4">
         <svg
@@ -37,13 +42,5 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    data: Object
-  }
-}
-</script>
 
 <style></style>

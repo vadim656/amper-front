@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(['category'])
+const runtimeConfig = useRuntimeConfig()
 </script>
 <template>
   <div class="container flex flex-col gap-8">
@@ -14,11 +15,11 @@ const props = defineProps(['category'])
       >
         <img
           v-if="item.attributes.IMG.data"
-          :src="$config.apiNot + item.attributes.IMG.data.attributes.url"
+          :src="runtimeConfig.public.apiNot + item.attributes.IMG.data.attributes.url"
           class="w-auto  h-[70px]"
           alt=""
         />
-        <img v-else :src="$config.noPhoto" class="w-auto  h-[70px]" alt="" />
+        <img v-else :src="runtimeConfig.public.noPhoto" class="w-auto  h-[70px]" alt="" />
         <h3 class="font-semibold text-base text-right">
           {{ item.attributes.Name }}
         </h3>

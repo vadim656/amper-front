@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(['marka'])
+const runtimeConfig = useRuntimeConfig()
 </script>
 <template>
   <div class="container flex flex-col gap-8">
@@ -12,7 +13,7 @@ const props = defineProps(['marka'])
       >
         <img
           v-if="item.attributes.IMG.data"
-          :src="$config.public.apiNot + item.attributes.IMG.data.attributes.url"
+          :src="runtimeConfig.public.apiNot + item.attributes.IMG.data.attributes.url"
           alt=""
           class="w-full max-w-[100px] h-auto"
         />

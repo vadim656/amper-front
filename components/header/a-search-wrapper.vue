@@ -1,5 +1,5 @@
 <script setup>
-import SEARCH from '~/gql/query/SEARCH.gql'
+import {SEARCH} from '~/gql/query/SEARCH.js'
 
 
 let searchInput = reactive({ text: '' })

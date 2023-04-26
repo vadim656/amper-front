@@ -10,73 +10,74 @@
         color: #343434;
         letter-spacing: 0.03em;
     }
+    .anime {
+      @apply motion-safe:transition duration-[0.25s] ease-in-out ;
+    }
+    .isLoaded {
+      @apply !opacity-100 ;
+    }
+    
+    .input-form {
+    @apply p-3 rounded-md border-[1px] border-[#212121]/20
+    }
+    
+    
+    :focus { outline: none; }
+    
+    
+    .page-enter-active,
+    .page-leave-active {
+      transition: opacity 0.2s;
+    }
+    .page-enter,
+    .page-leave-to {
+      opacity: 0;
+    }
+    
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s ease;
+    }
+    
+    .fade-enter-from,
+    .fade-leave-to {
+      opacity: 0;
+    }
+    
+    
+    /* select::-ms-expand {
+      display: none;
+    } */
+    
+    select {
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+      background-image: url(https://dl.dropbox.com/s/6q2p49jczkvy2n1/arrows-bg.svg);
+      background-position: calc(100% - 14px) -28px, 100%, calc(100% - 28px) 0;
+      background-size: auto, 34px 100%, 1px 100%;
+      background-repeat: no-repeat;
+      transition: border-color 0.1s linear;
+      border-radius: 6px;
+      padding: 8px 44px 8px 8px;
+      background-color: #EEEEEE;
+      font-size: 14px;
+      height: 40px;
+    }
+    select:focus {
+      box-shadow: none;
+      outline: 0;
+      background-image: url(https://dl.dropbox.com/s/6q2p49jczkvy2n1/arrows-bg.svg);
+      background-position: calc(100% - 14px) 16px, 100%, calc(100% - 28px) 0;
+    }
+    
+    .p-button:focus {
+      box-shadow: none !important;
+    }
    
 }
 
 
-.anime {
-  @apply motion-safe:transition duration-[0.25s] ease-in-out ;
-}
-.isLoaded {
-  @apply !opacity-100 ;
-}
 
-.input-form {
-@apply p-3 rounded-md border-[1px] border-[#212121]/20
-}
-
-
-:focus { outline: none; }
-
-
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.2s;
-}
-.page-enter,
-.page-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-
-/* select::-ms-expand {
-  display: none;
-} */
-
-select {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-image: url(https://dl.dropbox.com/s/6q2p49jczkvy2n1/arrows-bg.svg);
-  background-position: calc(100% - 14px) -28px, 100%, calc(100% - 28px) 0;
-  background-size: auto, 34px 100%, 1px 100%;
-  background-repeat: no-repeat;
-  transition: border-color 0.1s linear;
-  border-radius: 6px;
-  padding: 8px 44px 8px 8px;
-  background-color: #EEEEEE;
-  font-size: 14px;
-  height: 40px;
-}
-select:focus {
-  box-shadow: none;
-  outline: 0;
-  background-image: url(https://dl.dropbox.com/s/6q2p49jczkvy2n1/arrows-bg.svg);
-  background-position: calc(100% - 14px) 16px, 100%, calc(100% - 28px) 0;
-}
-
-.p-button:focus {
-  box-shadow: none !important;
-}
 
 
