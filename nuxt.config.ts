@@ -25,24 +25,36 @@ export default defineNuxtConfig({
     'primeicons/primeicons.css'
   ],
   tailwindcss: {
-    cssPath: '~/assets/css/tailwind.css'
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: '~/tailwind.config.js'
   },
 
   runtimeConfig: {
     // Keys within public are also exposed client-side
     public: {
-      api: process.env.STRAPI,
-      apiNot: process.env.STRAPI_URL,
+      api: 'https://api.amper-plus.ru/',
+      apiNot: 'https://api.amper-plus.ru',
       noPhoto:
         'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg',
-      graphqlURL: process.env.STRAPI_GRAPGHQL,
-      strapiURL: process.env.STRAPI_URL
+      graphqlURL: 'https://api.amper-plus.ru/graphql',
+      strapiURL: 'https://api.amper-plus.ru'
     }
   },
   pinia: {
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
   },
-
+  apollo: {
+    autoImports: true,
+    tokenStorage: 'cookie',
+    clients: {
+      default: {
+        httpEndpoint: 'https://api.amper-plus.ru/graphql',
+        httpLinkOptions: {
+          credentials: 'include'
+        }
+      }
+    }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
@@ -52,6 +64,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
   build: {
-    transpile: ['primevue', '@apollo/client', 'ts-invariant/process']
+    transpile: ['primevue', 'ts-invariant/process']
   }
 })
