@@ -6,7 +6,7 @@ let searchInput = reactive({ text: '' })
 
 
 
-const { result, loading, error, refetch } = useQuery(SEARCH, () => ({
+const { result} = useQuery(SEARCH, () => ({
   NAME: searchInput.text
 }))
 const products = computed(() => result.value?.search ?? [])
