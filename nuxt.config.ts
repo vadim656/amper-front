@@ -29,16 +29,15 @@ export default defineNuxtConfig({
     configPath: '~/tailwind.config.js'
   },
 
-  runtimeConfig: {
+  publicRuntimeConfig: {
     // Keys within public are also exposed client-side
-    public: {
-      api: 'https://api.amper-plus.ru/',
-      apiNot: 'https://api.amper-plus.ru',
-      noPhoto:
-        'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg',
-      graphqlURL: 'https://api.amper-plus.ru/graphql',
-      strapiURL: 'https://api.amper-plus.ru'
-    }
+
+    api: 'https://api.amper-plus.ru/',
+    apiNot: 'https://api.amper-plus.ru',
+    noPhoto:
+      'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg',
+    graphqlURL: 'https://api.amper-plus.ru/graphql',
+    strapiURL: 'https://api.amper-plus.ru'
   },
   pinia: {
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]

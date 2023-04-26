@@ -1,5 +1,14 @@
 <script setup>
 import aProductCart from '../Product/a-product-cart.vue'
+import { useToastStore } from '@/store'
+import { useToast } from 'primevue/usetoast'
+const toast = useToast()
+
+const toastAdd = useToastStore()
+
+
+
+
 const router = useRouter()
 
 const props = defineProps(['cart'])
@@ -17,9 +26,20 @@ function getLink () {
   router.push('/cart')
   emit('closeCart')
 }
+
+watch(toastAdd.getToast, () => {
+  console.log('someGetter')
+  toast.add({
+    severity: 'success',
+    summary: 'Добавлен в корзину!',
+    detail: `Арт : ${toastAdd.getToast}`,
+    life: 2000
+  })
+})
 </script>
 
 <template>
+  <Toast />
   <div
     class="absolute bg-white drop-shadow-xl rounded-md w-full max-w-[400px] top-14 right-0 z-[2]"
   >
