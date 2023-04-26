@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css'
   },
-  plugins: [],
+
   runtimeConfig: {
     // Keys within public are also exposed client-side
     public: {
