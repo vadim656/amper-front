@@ -42,13 +42,7 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
   },
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: 'https://api.amper-plus.ru/graphql'
-      }
-    }
-  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
@@ -58,6 +52,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
   build: {
-    transpile: ['primevue']
+    transpile: ['primevue', '@apollo/client', 'ts-invariant/process']
   }
 })
