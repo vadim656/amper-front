@@ -8,6 +8,5 @@ export default defineApolloClient({
     watchQuery: {
       fetchPolicy: 'network-only',
     },
-  },
-  websocketsOnly: false,
+  }
 });

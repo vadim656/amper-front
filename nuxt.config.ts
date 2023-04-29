@@ -1,5 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  vite: {
+    server: {
+      hmr: {
+        protocol: 'wss',
+        clientPort: 443,
+        path: 'hmr/'
+      }
+    }
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
