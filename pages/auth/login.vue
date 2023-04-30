@@ -75,6 +75,7 @@ const { mutate: login, onDone } = useMutation(loginQuery, () => ({
 onDone(result => {
   // onLogin(result.data.login.jwt)
   store.registerUser()
+  console.log('result', result);
   setTimeout(() => {
     router.push('/')
   }, 500)

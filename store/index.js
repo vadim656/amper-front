@@ -58,15 +58,15 @@ export const userInfo = defineStore('session', {
   },
   actions: {
      registerUser () {
-      const { result, onResult } = useQuery(queryMe)
+      const {  onResult } = useQuery(queryMe)
 
       onResult(res => {
         this.info = res.data.me
       })
     },
-    clearSession () {
-      this.info = {}
-    }
+    // clearSession () {
+    //   this.info = {}
+    // }
   },
   getters: {
     getInfo: state => state.info

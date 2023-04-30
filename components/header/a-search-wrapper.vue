@@ -1,16 +1,12 @@
 <script setup>
-import {SEARCH} from '~/gql/query/SEARCH.js'
-
+import { SEARCH } from '~/gql/query/SEARCH.js'
 
 let searchInput = reactive({ text: '' })
 
-
-
-const { result} = useQuery(SEARCH, () => ({
+const { result: searchData } = useQuery(SEARCH, () => ({
   NAME: searchInput.text
 }))
-const products = computed(() => result.value?.search ?? [])
-
+const products = computed(() => searchData.value?.search ?? [])
 </script>
 <template>
   <div class="relative rounded-md shadow-sm border">
@@ -39,13 +35,12 @@ const products = computed(() => result.value?.search ?? [])
       </svg>
     </div>
     <div
-    v-if="products && products.products && searchInput.text.length >= 3"
+      v-if="products && products.products && searchInput.text.length >= 3"
       class="absolute top-10 bg-white drop-shadow-md rounded-md z-[99] 4 w-full overflow-hidden"
     >
-
       <div class="flex flex-col -gap-1">
         <div
-          v-for="item in products.products.data "
+          v-for="item in products.products.data"
           :key="item.id"
           class="py-3 border-b border-[#212121]/30 flex cursor-pointer justify-between gap-4 w-full hover:bg-[#212121]/10 anime p-4"
         >

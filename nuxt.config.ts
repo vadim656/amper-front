@@ -65,8 +65,10 @@ export default defineNuxtConfig({
   },
   apollo: {
     clients: {
-        default: './apollo/default.ts',
-    }
+      default: {
+        httpEndpoint: 'https://api.amper-plus.ru/graphql'
+      }
+    },
   },
   build: {
     transpile: ['primevue']

@@ -12,8 +12,8 @@ const user = userInfo()
 const router = useRouter()
 // const { onLogout } = useApollo()
 
-const { result: sities } = useQuery(SITY_ALL)
-const { result: categories } = useQuery(CATS_ALL)
+const { data: sities } = await useAsyncQuery(SITY_ALL)
+const { data: categories } = await useAsyncQuery(CATS_ALL)
 
 const categoriesCom = computed(() => categories.value?.data ?? [])
 

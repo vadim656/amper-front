@@ -1,7 +1,7 @@
 <template>
   <div class="bg-[#E5E5E5]">
     <div class="container py-4 flex justify-between">
-      <pre>{{ result }}</pre>
+      <pre>{{ data }}</pre>
       <!-- <div class="flex gap-20">
         <div class="flex flex-col gap-4">
           <span class="font-bold">Категории</span>
@@ -72,7 +72,7 @@
 import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
 
 
-const { result } = useQuery(FOOTER_ALL)
+const { data } = await useAsyncQuery(FOOTER_ALL)
 </script>
 
 <style></style>

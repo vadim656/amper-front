@@ -85,7 +85,7 @@ definePageMeta({
   layout: 'lk'
 })
 
-const { result: dataResults } = useQuery(ALL_ORDERS, () => ({
+const { data: dataResults } = await useAsyncQuery(ALL_ORDERS, () => ({
   ID: 1
 }))
 
