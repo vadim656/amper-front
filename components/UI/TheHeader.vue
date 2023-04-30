@@ -13,9 +13,9 @@ const router = useRouter()
 // const { onLogout } = useApollo()
 
 const { data: sities } = await useAsyncQuery(SITY_ALL)
-const { data: categories } = await useAsyncQuery(CATS_ALL)
+// const { data: categories } = await useAsyncQuery(CATS_ALL)
 
-const categoriesCom = computed(() => categories.value?.data ?? [])
+// const categoriesCom = computed(() => categories.value?.data ?? [])
 
 const sity = useSity()
 const cart = useCart()
@@ -126,7 +126,7 @@ function logout () {
             <img src="~/assets/img/icons/catalog.svg" alt="" />
             <span class="text-white font-bold">Каталог</span>
           </button>
-          <pre>{{ categoriesCom }}</pre>
+          <!-- <pre>{{ categoriesCom }}</pre> -->
           <!-- <div
             ref="catalog"
             v-if="catalogView == true"
