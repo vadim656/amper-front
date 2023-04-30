@@ -230,7 +230,7 @@
       >
         <div class="flex justify-between items-center">
           <span>Сумма заказа:</span>
-          <span>{{ summPriceCart | price }} ₽</span>
+          <span>{{ summPriceCart }} ₽</span>
         </div>
         <div class="flex justify-between items-center">
           <span>Доставка:</span>
@@ -238,7 +238,7 @@
         </div>
         <div class="flex justify-between items-center font-bold">
           <span class="text-2xl">Итого:</span>
-          <span class="text-2xl text-red/70">{{ summPriceCart | price }} ₽</span>
+          <span class="text-2xl text-red/70">{{ summPriceCart }} ₽</span>
         </div>
         <button class="bg-red/70 p-3 rounded-md text-white">
           Оформить заказ

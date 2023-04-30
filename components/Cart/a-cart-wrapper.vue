@@ -51,7 +51,7 @@ watch(toastAdd.getToast, () => {
         :data="item"
       />
       <div class="w-full flex items-center justify-between pt-3">
-        <span>Итого: {{ summPriceCart | price }} ₽</span>
+        <span>Итого: {{ summPriceCart  }} ₽</span>
         <button @click="getLink"
           class="flex justify-center items-center bg-red/70 px-8 py-3 rounded-md text-white"
         >
