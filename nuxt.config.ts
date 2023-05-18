@@ -5,13 +5,10 @@ export default defineNuxtConfig({
       port: 3000,
       https: true,
       hmr: {
+        host: 'localhost',
         protocol: 'wss'
       }
     }
-  },
-  content: {
-    base: '/_content',
-    watch: false
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
