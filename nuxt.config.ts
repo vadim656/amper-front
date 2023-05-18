@@ -2,9 +2,12 @@
 export default defineNuxtConfig({
   vite: {
     server: {
+      port: 3000,
+      https: true,
       hmr: {
-        protocol: 'ws',
-        host: 'localhost'
+        host: 'localhost',
+        port: 3001,
+        protocol: 'wss'
       }
     }
   },
@@ -89,12 +92,12 @@ export default defineNuxtConfig({
     transpile: ['primevue']
   },
   hooks: {
-    'vite:extendConfig'(config, { isClient }) {
+    'vite:extendConfig' (config, { isClient }) {
       console.log(
         isClient ? 'client' : 'server',
         'config hmr:',
         config.server.hmr
-      );
-    },
-  },
+      )
+    }
+  }
 })
