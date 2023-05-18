@@ -1,15 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  vite: {
-    server: {
-      port: 3000,
-      https: true,
-      hmr: {
-        host: 'localhost',
-        protocol: 'wss'
-      }
-    }
-  },
+  ssr: false,
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
