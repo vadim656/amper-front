@@ -5,8 +5,8 @@ export default defineNuxtConfig({
       port: 3000,
       https: true,
       hmr: {
-        host: '0.0.0.0',
-        port: 3001,
+        host: '94.228.125.175',
+        port: 443,
         protocol: 'wss'
       }
     }
