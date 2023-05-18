@@ -2,8 +2,11 @@
 export default defineNuxtConfig({
   vite: {
     server: {
-      hmr: false,
-    },
+      hmr: {
+        protocol: 'ws',
+        host: 'localhost'
+      }
+    }
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
