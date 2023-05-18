@@ -68,7 +68,7 @@ let variables = ref({
 //   variables.URL = route.params.url
 // })
 
-const { data: dataProducts } = await useAsyncQuery(PRODUCTS_ALL, () => {
+const { result: dataProducts } = useQuery(PRODUCTS_ALL, () => {
   variables.value
 })
 

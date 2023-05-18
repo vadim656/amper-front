@@ -2,10 +2,8 @@
 export default defineNuxtConfig({
   vite: {
     server: {
-      hmr: {
-        protocol: 'ws'
-      }
-    }
+      hmr: false,
+    },
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
@@ -86,5 +84,14 @@ export default defineNuxtConfig({
   },
   build: {
     transpile: ['primevue']
-  }
+  },
+  hooks: {
+    'vite:extendConfig'(config, { isClient }) {
+      console.log(
+        isClient ? 'client' : 'server',
+        'config hmr:',
+        config.server.hmr
+      );
+    },
+  },
 })

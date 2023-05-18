@@ -36,7 +36,7 @@ let variables2 = ref({
   ]
 })
 
-const { data: product } = await useAsyncQuery(PRODUCT_ID, {
+const { result: product } = useQuery(PRODUCT_ID, {
   ID: route.params.id
 })
 
@@ -44,17 +44,17 @@ const productID = computed(() => {
   if (product.value?.product) {
     return product.value.product.data
   } else {
-    return null
+    return []
   }
 })
 
-const { data: products } = await useAsyncQuery(PRODUCTS_ALL, variables2.value)
+const { result: products } =  useQuery(PRODUCTS_ALL, variables2.value)
 
 const productsID = computed(() => {
   if (products.value?.products) {
     return products.value.products.data
   } else {
-    return null
+    return []
   }
 })
 </script>
