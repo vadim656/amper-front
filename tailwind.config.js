@@ -5,20 +5,18 @@ module.exports = {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
-    "./app.vue"
+    './app.vue'
   ],
   theme: {
     container: {
-      center: true,
+      center: true
     },
     colors: {
-      'red': '#BB1E10',
-      'white': '#FFFFFF',
-      'neutral': '#EEEEEE',
+      red: '#BB1E10',
+      white: '#FFFFFF',
+      neutral: '#EEEEEE',
       'neutral-big': '#47555F'
-    },
+    }
   },
-  plugins: [
-   
-  ],
+  plugins: []
 }

@@ -50,31 +50,6 @@ export const useCart = defineStore('cart', {
 })
 
 
-export const userInfo = defineStore('session', {
-  state: () => {
-    return {
-      info: {}
-    }
-  },
-  actions: {
-     registerUser () {
-      const {  onResult } = useQuery(queryMe)
-
-      onResult(res => {
-        this.info = res.data.me
-      })
-    },
-    // clearSession () {
-    //   this.info = {}
-    // }
-  },
-  getters: {
-    getInfo: state => state.info
-  },
-  persist: {
-    storage: persistedState.localStorage
-  }
-})
 
 
 export const useToastStore = defineStore('toast', {

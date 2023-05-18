@@ -1,20 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  vite: {
-    server: {
-      hmr: {
-        protocol: 'wss',
-        clientPort: 443,
-        path: 'hmr/'
-      }
-    }
-  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       charset: 'utf-16',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'AMPER',
+      title: 'AMPER +',
       meta: [
         // <meta name="description" content="My amazing site">
         { name: 'description', content: 'My amazing site.' }
@@ -32,7 +23,7 @@ export default defineNuxtConfig({
     'primevue/resources/themes/tailwind-light/theme.css',
     'primevue/resources/primevue.css',
     'primeicons/primeicons.css',
-    '~/assets/css/tailwind.css'
+    '~/assets/css/main.css'
   ],
   runtimeConfig: {
     public: {
@@ -48,11 +39,11 @@ export default defineNuxtConfig({
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
   },
   modules: [
-    '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@pinia/nuxt',
-    '@nuxtjs/apollo'
+    '@nuxtjs/apollo',
+    '@nuxtjs/strapi'
   ],
   postcss: {
     plugins: {
@@ -60,15 +51,31 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  tailwindcss: {
-    viewer: false
+  components: {
+    global: true,
+    dirs: ['~/components']
+  },
+  strapi: {
+    url: 'https://api.amper-plus.ru',
+    prefix: '/api',
+    version: 'v4',
+    cookie: {
+      sameSite: 'strict'
+    },
+    cookieName: 'strapi_jwt'
   },
   apollo: {
+    authType: 'Bearer',
+    authHeader: 'Authorization',
+    tokenStorage: 'cookie',
     clients: {
       default: {
-        httpEndpoint: 'https://api.amper-plus.ru/graphql'
+        httpEndpoint: 'https://api.amper-plus.ru/graphql',
+        httpLinkOptions: {
+          credentials: 'include'
+        }
       }
-    },
+    }
   },
   build: {
     transpile: ['primevue']

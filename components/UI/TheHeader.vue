@@ -1,18 +1,15 @@
 <script setup>
-import { useSity, useCart, userInfo } from '@/store'
+import { useSity, useCart } from '@/store'
 import { onClickOutside } from '@vueuse/core'
 import AModal from '../All/a-modal.vue'
 import ACartWrapper from '../Cart/a-cart-wrapper.vue'
-import {SITY_ALL} from '~/gql/query/SITY_ALL.js'
-import {CATS_ALL} from '~/gql/query/CATS_ALL.js'
-
-
-const user = userInfo()
+import { SITY_ALL } from '~/gql/query/SITY_ALL.js'
+import { CATS_ALL } from '~/gql/query/CATS_ALL.js'
 
 const router = useRouter()
 // const { onLogout } = useApollo()
 
-const { data: sities } = await useAsyncQuery(SITY_ALL)
+const { result: sities } = useQuery(SITY_ALL)
 // const { data: categories } = await useAsyncQuery(CATS_ALL)
 
 // const categoriesCom = computed(() => categories.value?.data ?? [])
@@ -57,10 +54,6 @@ const closeCartEmit = () => {
 }
 
 function logout () {
-  setTimeout(() => {
-    console.log('user.clearSession()');
-    
-  }, 1000)
   // onLogout()
   router.push('/auth/login')
 }
@@ -80,7 +73,7 @@ function logout () {
           <div class="flex gap-4">
             <Nuxt-link to="/auth/login">Войти</Nuxt-link>
             <button>Регистрация</button>
-            <span v-if="user">{{ user.getInfo.username }}</span>
+            <span>user</span>
             <button @click="logout">Выйти</button>
           </div>
         </div>
