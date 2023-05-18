@@ -5,7 +5,7 @@ export default defineNuxtConfig({
       port: 3000,
       https: true,
       hmr: {
-        host: 'https://amper-plus.ru',
+        host: '0.0.0.0',
         port: 3001,
         protocol: 'wss'
       }
