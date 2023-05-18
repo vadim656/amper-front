@@ -9,6 +9,10 @@ export default defineNuxtConfig({
       }
     }
   },
+  content: {
+    base: '/_content',
+    watch: false
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
