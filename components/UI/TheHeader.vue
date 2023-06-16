@@ -12,7 +12,12 @@ const router = useRouter()
 const { result: sities } = useQuery(SITY_ALL)
 const { result: categories, loading: catLoad } = useQuery(CATS_ALL)
 
-const categoriesCom = computed(() => categories.value?.categories ?? [])
+const categoriesCom = computed(() => {
+  if (catLoad.value ?? categories.value?.categories) {
+    return categories.value.categories
+  }
+  return null
+})
 
 const sity = useSity()
 const cart = useCart()
