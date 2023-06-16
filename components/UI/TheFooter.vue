@@ -1,5 +1,8 @@
 <script setup>
+import { useRouter } from 'nuxt/app'
 import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
+
+const router = useRouter()
 
 const { result, loading } = useQuery(FOOTER_ALL)
 
@@ -15,7 +18,6 @@ function linkCatalog (id) {
   router.push({
     path: path
   })
-  catalogView.value = false
 }
 </script>
 <template>
