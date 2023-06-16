@@ -12,7 +12,7 @@ const router = useRouter()
 const { result: sities } = useQuery(SITY_ALL)
 const { result: categories, loading: catLoad } = useQuery(CATS_ALL)
 
-const categoriesCom = computed(() => categories.value?.categories.data ?? [])
+const categoriesCom = computed(() => categories.value?.categories ?? [])
 
 const sity = useSity()
 const cart = useCart()
@@ -125,7 +125,7 @@ function logout () {
             v-if="catalogView == true"
             class="absolute top-14 bg-white drop-shadow-md rounded-md z-[99] p-4 w-full overflow-hidden"
           >
-            <div class="flex flex-col gap-4" v-if="!catLoad && categoriesCom">
+            <!-- <div class="flex flex-col gap-4" v-if="!catLoad && categoriesCom">
               <div
                 v-for="item in categoriesCom"
                 :key="item.id"
@@ -135,7 +135,7 @@ function logout () {
                   item.attributes.Name
                 }}</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <HeaderASearchWrapper />
