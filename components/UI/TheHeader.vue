@@ -10,14 +10,14 @@ const router = useRouter()
 // const { onLogout } = useApollo()
 
 const { result: sities } = useQuery(SITY_ALL)
-const { result: categories, loading: catLoad } = useQuery(CATS_ALL)
+// const { result: categories, loading: catLoad } = useQuery(CATS_ALL)
 
-const categoriesCom = computed(() => {
-  if (catLoad.value ?? categories.value?.categories) {
-    return categories.value.categories
-  }
-  return null
-})
+// const categoriesCom = computed(() => {
+//   if (catLoad.value ?? categories.value?.categories) {
+//     return categories.value.categories
+//   }
+//   return null
+// })
 
 const sity = useSity()
 const cart = useCart()
@@ -27,7 +27,7 @@ const modalCart = ref(false)
 const catalog = ref(null)
 const catalogView = ref(false)
 
-onClickOutside(catalog, event => (catalogView.value = false))
+// onClickOutside(catalog, event => (catalogView.value = false))
 
 let modalSity = ref(false)
 
