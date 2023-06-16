@@ -48,9 +48,7 @@
 </template>
 
 <script setup>
-
-import { gql } from "@apollo/client/core"
-
+import { gql } from '@apollo/client/core'
 
 const router = useRouter()
 
@@ -72,8 +70,8 @@ const { mutate: login, onDone } = useMutation(loginQuery, () => ({
 }))
 onDone(result => {
   // onLogin(result.data.login.jwt)
- 
-  console.log('result', result);
+
+  console.log('result', result)
   setTimeout(() => {
     router.push('/')
   }, 500)

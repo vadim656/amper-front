@@ -2,29 +2,32 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --host 0.0.0.0",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview --host 0.0.0.0",
+    "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@nuxtjs/apollo": "^5.0.0-alpha.5",
     "@nuxtjs/strapi": "^1.9.1",
-    "@vueuse/nuxt": "^9.13.0",
-    "@types/node": "^18",
+    "@vueuse/nuxt": "^10.1.0",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "nuxt": "^3.4.2",
+    "postcss": "^8.4.23",
     "primeflex": "3.3.0",
     "primeicons": "6.0.1",
     "primevue": "3.22.4",
-    "postcss": "^8.4.23",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "vee-validate": "^4.8.6"
   },
   "dependencies": {
-    "@nuxtjs/apollo": "5.0.0-alpha.6",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@pinia/nuxt": "^0.4.9",
-    "pinia": "^2.0.35"
+    "@vueuse/components": "^10.1.0",
+    "@vueuse/core": "^10.1.0",
+    "ofetch": "^1.0.1",
+    "pinia": "^2.0.35",
+    "uuidv4": "^6.2.13"
   }
 }

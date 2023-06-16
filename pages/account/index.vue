@@ -1,14 +1,7 @@
-<script setup>
-
-
-
-
-</script>
+<script setup></script>
 <template>
   <div class="container">
-    
-
-  </div>
+  account</div>
 </template>
 
 <style></style>

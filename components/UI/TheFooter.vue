@@ -1,17 +1,28 @@
+<script setup>
+import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
+
+const { result } = useQuery(FOOTER_ALL)
+
+function linkCatalog (id) {
+  const path = '/category/' + id
+  router.push({
+    path: path
+  })
+  catalogView.value = false
+}
+</script>
 <template>
   <div class="bg-[#E5E5E5]">
     <div class="container py-4 flex justify-between">
-      <pre>{{ data }}</pre>
-      <!-- <div class="flex gap-20">
+      <!-- <pre>{{ result }}</pre> -->
+      <div class="flex gap-20">
         <div class="flex flex-col gap-4">
           <span class="font-bold">Категории</span>
           <ul class="flex flex-col gap-2">
             <li v-for="item in result.kategoriiFuters.data" :key="item.id">
-              <NuxtLink
-                :to="`/` + item.attributes.URL"
-                class="text-sm cursor-pointer"
-                >{{ item.attributes.Name }}</NuxtLink
-              >
+              <span @click="linkCatalog(item.attributes.URL)">{{
+                item.attributes.Name
+              }}</span>
             </li>
           </ul>
         </div>
@@ -19,11 +30,7 @@
           <span class="font-bold">Услуги</span>
           <ul class="flex flex-col gap-2">
             <li v-for="item in result.uslugiFuters.data" :key="item.id">
-              <NuxtLink
-                :to="`/` + item.attributes.URL"
-                class="text-sm cursor-pointer"
-                >{{ item.attributes.Name }}</NuxtLink
-              >
+              <span>{{ item.attributes.Name }}</span>
             </li>
           </ul>
         </div>
@@ -31,11 +38,7 @@
           <span class="font-bold">Помощь</span>
           <ul class="flex flex-col gap-2" v-if="result && result.pomoshhFuters">
             <li v-for="item in result.pomoshhFuters.data" :key="item.id">
-              <NuxtLink
-                :to="`/` + item.attributes.URL"
-                class="text-sm cursor-pointer"
-                >{{ item.attributes.Name }}</NuxtLink
-              >
+              <span>{{ item.attributes.Name }}</span>
             </li>
           </ul>
         </div>
@@ -62,17 +65,9 @@
         <div class="text-sm">
           © 2005 – 2022 ООО «Ампер Плюс». Все права защищены.
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
-  
 </template>
-
-<script setup>
-import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
-
-
-const { data } = await useAsyncQuery(FOOTER_ALL)
-</script>
 
 <style></style>

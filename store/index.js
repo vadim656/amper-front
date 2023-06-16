@@ -1,15 +1,4 @@
 import { defineStore } from 'pinia'
-import { gql } from "@apollo/client/core"
-
-const queryMe = gql`
-  query {
-    me {
-      id
-      username
-    }
-  }
-`
-
 
 
 export const useSity = defineStore('sity', {
@@ -48,9 +37,6 @@ export const useCart = defineStore('cart', {
     storage: persistedState.localStorage
   }
 })
-
-
-
 
 export const useToastStore = defineStore('toast', {
   state: () => ({

@@ -1,6 +1,8 @@
 <script setup>
 import { PRODUCTS_ALL } from '~/gql/query/category/PRODUCTS_ALL.js'
-
+definePageMeta({
+  layout: 'default'
+})
 const done = ref(false)
 
 const route = useRoute()
@@ -57,20 +59,19 @@ const productType = reactive({ val: 'grid' })
 
 //fetch data
 
-let variables = ref({
-  URL: route.params.url,
-  PAGE: pageCountValue,
-  PAGESIZE: pageSizeValue,
-  SORT: selectSort
-})
-
 // watchEffect(route.params.url, () => {
 //   variables.URL = route.params.url
 // })
 
-const { result: dataProducts } = useQuery(PRODUCTS_ALL, () => {
-  variables.value
-})
+const { result: dataProducts, loading: dataProductsLoading } = useQuery(
+  PRODUCTS_ALL,
+  () => ({
+    URL: route.params.url,
+    PAGE: pageCountValue.value,
+    PAGESIZE: pageSizeValue.value,
+    SORT: selectSort.value
+  })
+)
 
 //  pagination
 
@@ -117,7 +118,7 @@ onMounted(() => {
 </script>
 <template>
   <Transition name="fade">
-    <div class="container grid grid-cols-12 gap-4" v-if="done == false">
+    <div class="container grid grid-cols-12 gap-4" v-if="dataProductsLoading">
       <Skeleton
         animation="wave"
         width="100%"

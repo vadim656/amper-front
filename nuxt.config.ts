@@ -1,10 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      charset: 'utf-16',
+      charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       title: 'AMPER +',
       meta: [
@@ -21,10 +20,10 @@ export default defineNuxtConfig({
     }
   },
   css: [
+    '~/assets/css/main.css',
     'primevue/resources/themes/tailwind-light/theme.css',
     'primevue/resources/primevue.css',
-    'primeicons/primeicons.css',
-    '~/assets/css/main.css'
+    'primeicons/primeicons.css'
   ],
   runtimeConfig: {
     public: {
@@ -80,14 +79,5 @@ export default defineNuxtConfig({
   },
   build: {
     transpile: ['primevue']
-  },
-  hooks: {
-    'vite:extendConfig' (config, { isClient }) {
-      console.log(
-        isClient ? 'client' : 'server',
-        'config hmr:',
-        config.server.hmr
-      )
-    }
   }
 })

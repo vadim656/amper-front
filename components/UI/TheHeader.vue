@@ -10,9 +10,9 @@ const router = useRouter()
 // const { onLogout } = useApollo()
 
 const { result: sities } = useQuery(SITY_ALL)
-// const { data: categories } = await useAsyncQuery(CATS_ALL)
+const { result: categories } = useQuery(CATS_ALL)
 
-// const categoriesCom = computed(() => categories.value?.data ?? [])
+const categoriesCom = computed(() => categories.value?.categories.data ?? [])
 
 const sity = useSity()
 const cart = useCart()
@@ -37,7 +37,7 @@ const close = () => {
   modalSity.value = false
 }
 
-const linkCatalog = id => {
+function linkCatalog (id) {
   const path = '/category/' + id
   router.push({
     path: path
@@ -120,17 +120,14 @@ function logout () {
             <span class="text-white font-bold">Каталог</span>
           </button>
           <!-- <pre>{{ categoriesCom }}</pre> -->
-          <!-- <div
+          <div
             ref="catalog"
             v-if="catalogView == true"
             class="absolute top-14 bg-white drop-shadow-md rounded-md z-[99] p-4 w-full overflow-hidden"
           >
-            <div
-              class="flex flex-col gap-4"
-              v-if="categories && categories.categories.data"
-            >
+            <div class="flex flex-col gap-4" v-if="categories && categoriesCom">
               <div
-                v-for="item in categories.categories.data"
+                v-for="item in categoriesCom"
                 :key="item.id"
                 class="cursor-pointer"
               >
@@ -139,7 +136,7 @@ function logout () {
                 }}</span>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
         <HeaderASearchWrapper />
 

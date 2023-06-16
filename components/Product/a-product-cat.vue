@@ -1,44 +1,43 @@
-<script>
+<script setup>
 import { useCart } from '@/store'
-export default {
-  props: {
-    product_data: {
-      type: Object
-    }
-  },
-  setup () {
-    const cart = useCart()
-    const runtimeConfig = useRuntimeConfig()
-    const router = useRouter()
-    function goToProduct (params) {
-      console.log('push product', params.attributes.kategorii_tovarovs.data[0].attributes.URL)
-      router.push({ path: '/category/product-' + params.attributes.kategorii_tovarovs.data[0].attributes.URL + '/' + params.id})
-    }
-    return { cart, goToProduct, runtimeConfig }
-  },
-  methods: {
-    addToCart (product) {
-      console.log(product)
-    }
-  },
-  computed: {
-    orderStars () {
-      let list = []
-      const data2 = this.product_data.attributes
-      for (var key in data2) {
-        if (key.includes('Stock')) {
-          list.push(data2[key])
-        }
-      }
-      const valData = list.filter(x => x > 0)
-      const sumWithInitial = list.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        0
-      )
-      return { list, sumWithInitial, valData }
+const props = defineProps(['product_data'])
+const cart = useCart()
+const runtimeConfig = useRuntimeConfig()
+const router = useRouter()
+function goToProduct (params) {
+  console.log(
+    'push product',
+    params.attributes.kategorii_tovarovs.data[0].attributes.URL
+  )
+  router.push({
+    path:
+      '/category/product/' +
+      // params.attributes.kategorii_tovarovs.data[0].attributes.URL +
+      // '/' +
+      params.id
+  })
+}
+
+function addToCart (product) {
+  console.log(product)
+}
+
+const orderStars = computed(() => {
+  let list = []
+  const data2 = props.product_data.attributes
+  for (var key in data2) {
+    if (key.includes('Stock')) {
+      list.push(data2[key])
     }
   }
-}
+  const valData = list.filter(x => x > 0)
+  const sumWithInitial = list.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  )
+
+  return { list, sumWithInitial, valData }
+})
 </script>
 <template>
   <div
@@ -47,10 +46,10 @@ export default {
     <div class="flex flex-col gap-2">
       <div>
         <img
-          v-if="product_data.attributes.Img.data.length > 0"
+          v-if="props.product_data.attributes.Img.data.length > 0"
           :src="
             runtimeConfig.public.apiNot +
-            product_data.attributes.Img.data[0].attributes.url
+            props.product_data.attributes.Img.data[0].attributes.url
           "
           alt=""
           class="rounded-md w-full h-[160px] object-contain"
@@ -66,7 +65,7 @@ export default {
         <h3
           class="w-full text-center text-sm font-bold giveMeEllipsis cursor-pointer"
         >
-          {{ product_data.attributes.Name }}
+          {{ props.product_data.attributes.Name }}
         </h3>
       </span>
     </div>
@@ -87,8 +86,8 @@ export default {
         <li class="flex justify-between gap-2">
           <span
             >Производитель:
-            <b v-if="product_data.attributes.Proizvoditel.length">{{
-              product_data.attributes.Proizvoditel
+            <b v-if="props.product_data.attributes.Proizvoditel.length">{{
+              props.product_data.attributes.Proizvoditel
             }}</b>
             <b v-else>Не указано</b>
           </span>
@@ -98,7 +97,10 @@ export default {
 
     <div class="flex justify-between items-center w-full">
       <span class="text-base font-bold">
-        {{ product_data.attributes.Price.toLocaleString('ru-RU') }} ₽</span
+        {{
+          props.product_data.attributes.Price.toLocaleString('ru-RU')
+        }}
+        ₽</span
       >
       <button
         v-if="orderStars.valData.length !== 0"
@@ -116,8 +118,6 @@ export default {
     </div>
   </div>
 </template>
-
-
 
 <style>
 .giveMeEllipsis {
