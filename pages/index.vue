@@ -1,9 +1,6 @@
 <template>
   <div v-if="loading">Loading...</div>
-  <div
-    v-else-if="!loading && resMainData !== null"
-    class="flex flex-col gap-20"
-  >
+  <div v-else-if="!loading && resMainData !== null" class="flex flex-col gap-20">
     <MainASlider />
     <MainACategory :category="resMainData.categories.data" />
     <MainABrends :marka="resMainData.markaAutos.data" />
@@ -12,7 +9,7 @@
 </template>
 <script setup>
 import { MARKA_ALL } from '~/gql/query/main/MARKA_ALL'
-const { data: resMain, loading } = await useAsyncQuery(MARKA_ALL)
+const { result: resMain, loading } = useQuery(MARKA_ALL)
 
 const resMainData = computed(() => {
   if (resMain.value?.categories.data) {
