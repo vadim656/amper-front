@@ -12,7 +12,7 @@
 </template>
 <script setup>
 import { MARKA_ALL } from '~/gql/query/main/MARKA_ALL'
-const { result: resMain, loading } = useQuery(MARKA_ALL)
+const { data: resMain, loading } = await useAsyncQuery(MARKA_ALL)
 
 const resMainData = computed(() => {
   if (resMain.value?.categories.data) {
