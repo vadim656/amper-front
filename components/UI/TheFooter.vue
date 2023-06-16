@@ -1,7 +1,14 @@
 <script setup>
 import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
 
-const { result , loading } = useQuery(FOOTER_ALL)
+const { result, loading } = useQuery(FOOTER_ALL)
+
+const resFoo = computed(() => {
+  if (result.value?.kategoriiFuters) {
+    return result.value
+  }
+  return null
+})
 
 function linkCatalog (id) {
   const path = '/category/' + id
@@ -14,12 +21,12 @@ function linkCatalog (id) {
 <template>
   <div class="bg-[#E5E5E5]">
     <div class="container py-4 flex justify-between">
-      <!-- <pre>{{ result }}</pre> -->
-      <div class="flex gap-20" v-if="!loading">
+      <!-- <pre>{{ resFoo }}</pre> -->
+      <div class="flex gap-20" v-if="!loading && resFoo !== null">
         <div class="flex flex-col gap-4">
           <span class="font-bold">Категории</span>
           <ul class="flex flex-col gap-2">
-            <li v-for="item in result.kategoriiFuters.data" :key="item.id">
+            <li v-for="item in resFoo.kategoriiFuters.data" :key="item.id">
               <span @click="linkCatalog(item.attributes.URL)">{{
                 item.attributes.Name
               }}</span>
@@ -29,7 +36,7 @@ function linkCatalog (id) {
         <div class="flex flex-col gap-4">
           <span class="font-bold">Услуги</span>
           <ul class="flex flex-col gap-2">
-            <li v-for="item in result.uslugiFuters.data" :key="item.id">
+            <li v-for="item in resFoo.uslugiFuters.data" :key="item.id">
               <span>{{ item.attributes.Name }}</span>
             </li>
           </ul>
@@ -37,7 +44,7 @@ function linkCatalog (id) {
         <div class="flex flex-col gap-4">
           <span class="font-bold">Помощь</span>
           <ul class="flex flex-col gap-2" v-if="result && result.pomoshhFuters">
-            <li v-for="item in result.pomoshhFuters.data" :key="item.id">
+            <li v-for="item in resFoo.pomoshhFuters.data" :key="item.id">
               <span>{{ item.attributes.Name }}</span>
             </li>
           </ul>
