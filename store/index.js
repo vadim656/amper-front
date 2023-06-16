@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 
-
 export const useSity = defineStore('sity', {
   state: () => ({
     sity: 'Ставрополь',
@@ -30,7 +29,25 @@ export const useCart = defineStore('cart', {
   },
   actions: {
     AddCartItem (product) {
-      this.cart.push(product)
+      const productReq = {
+        ...product,
+        colVo: 1
+      }
+      this.cart.push(productReq)
+    },
+    changeColItem (i, num) {
+      const items = this.cart
+      let element = i
+      let indices = {}
+      let idx = items.indexOf(element)
+      while (idx != -1) {
+        indices = idx
+        idx = items.indexOf(element, idx + 1)
+      }
+      this.cart[indices].colVo = num
+    },
+    deleteItem (id) {
+      this.cart = this.cart.filter(x => x.id !== id)
     }
   },
   persist: {

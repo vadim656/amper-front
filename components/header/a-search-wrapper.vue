@@ -1,18 +1,30 @@
 <script setup>
 import { SEARCH } from '~/gql/query/SEARCH.js'
 
-let searchInput = reactive({ text: '' })
+let searchInput = ref('')
 
 const { result: searchData } = useQuery(SEARCH, () => ({
-  NAME: searchInput.text
+  NAME: searchInput.value
 }))
 const products = computed(() => searchData.value?.search ?? [])
+
+const router = useRouter()
+
+function linkCatalog (id) {
+  const path = '/category/product/' + id
+  router.push({
+    path: path
+  })
+  setTimeout(() => {
+    searchInput.value = ''
+  }, 200)
+}
 </script>
 <template>
   <div class="relative rounded-md shadow-sm border">
     <input
       type="text"
-      v-model="searchInput.text"
+      v-model="searchInput"
       class="block p-2 w-full min-w-[320px] sm:min-w-[600px] border-[#212121]/20 text-red-900 placeholder-red-300 focus:outline-none sm:text-sm rounded-md"
       placeholder="Поиск по сайту"
     />
@@ -35,11 +47,12 @@ const products = computed(() => searchData.value?.search ?? [])
       </svg>
     </div>
     <div
-      v-if="products && products.products && searchInput.text.length >= 3"
+      v-if="products && products.products && searchInput.length >= 3"
       class="absolute top-10 bg-white drop-shadow-md rounded-md z-[99] 4 w-full overflow-hidden"
     >
       <div class="flex flex-col -gap-1">
         <div
+          @click="linkCatalog(item.id)"
           v-for="item in products.products.data"
           :key="item.id"
           class="py-3 border-b border-[#212121]/30 flex cursor-pointer justify-between gap-4 w-full hover:bg-[#212121]/10 anime p-4"

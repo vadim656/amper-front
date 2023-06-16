@@ -10,14 +10,14 @@ const router = useRouter()
 // const { onLogout } = useApollo()
 
 const { result: sities } = useQuery(SITY_ALL)
-// const { result: categories, loading: catLoad } = useQuery(CATS_ALL)
+const { result: categoriesAll, loading: catLoad } = useQuery(CATS_ALL)
 
-// const categoriesCom = computed(() => {
-//   if (catLoad.value ?? categories.value?.categories) {
-//     return categories.value.categories
-//   }
-//   return null
-// })
+const categoriesCom = computed(() => {
+  if (categoriesAll.value?.categories) {
+    return categoriesAll.value.categories.data
+  }
+  return null
+})
 
 const sity = useSity()
 const cart = useCart()
@@ -27,7 +27,7 @@ const modalCart = ref(false)
 const catalog = ref(null)
 const catalogView = ref(false)
 
-// onClickOutside(catalog, event => (catalogView.value = false))
+onClickOutside(catalog, event => (catalogView.value = false))
 
 let modalSity = ref(false)
 
@@ -93,12 +93,12 @@ function logout () {
           >Указать автомобиль</nuxt-link
         >
         <nuxt-link class="font-bold" to="/">Связаться с нами</nuxt-link>
-        <button class="flex gap-2 items-center">
+        <!-- <button class="flex gap-2 items-center">
           <span>Избранное</span>
           <img src="~/assets/img/icons/izbrannoe.svg" alt="" />
           <span>0</span>
-        </button>
-        <button @click="modalCart = !modalCart" class="flex gap-2 items-center">
+        </button> -->
+        <button @click="modalCart = !modalCart" class="flex gap-2 items-center ml-12">
           <span>Корзина </span>
           <img src="~/assets/img/icons/cart.svg" alt="" />
           <span>{{ cart.getCart.length }}</span>
@@ -130,7 +130,7 @@ function logout () {
             v-if="catalogView == true"
             class="absolute top-14 bg-white drop-shadow-md rounded-md z-[99] p-4 w-full overflow-hidden"
           >
-            <!-- <div class="flex flex-col gap-4" v-if="!catLoad && categoriesCom">
+            <div class="flex flex-col gap-4" v-if="!catLoad && categoriesCom">
               <div
                 v-for="item in categoriesCom"
                 :key="item.id"
@@ -140,13 +140,10 @@ function logout () {
                   item.attributes.Name
                 }}</span>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
-        <HeaderASearchWrapper />
-
-        <nuxt-link to="/">Подбор АКБ</nuxt-link>
-        <nuxt-link to="/">Подбор по авто</nuxt-link>
+        <HeaderASearchWrapper />        
       </div>
     </div>
     <!-- modal sity -->

@@ -8,7 +8,7 @@ const done = ref(false)
 const route = useRoute()
 
 //  sort
-const selectedPrice = ref({ val: 'Сначала дешевле' })
+const selectedPrice = ref({ val: 'По наличию' })
 
 const optionsPrice = ref([
   'Сначала дешевле',
