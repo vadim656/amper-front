@@ -1,7 +1,7 @@
 <script setup>
 import { FOOTER_ALL } from '~/gql/query/main/FOOTER_ALL.js'
 
-const { result } = useQuery(FOOTER_ALL)
+const { result , loading } = useQuery(FOOTER_ALL)
 
 function linkCatalog (id) {
   const path = '/category/' + id
@@ -15,7 +15,7 @@ function linkCatalog (id) {
   <div class="bg-[#E5E5E5]">
     <div class="container py-4 flex justify-between">
       <!-- <pre>{{ result }}</pre> -->
-      <div class="flex gap-20">
+      <div class="flex gap-20" v-if="!loading">
         <div class="flex flex-col gap-4">
           <span class="font-bold">Категории</span>
           <ul class="flex flex-col gap-2">
