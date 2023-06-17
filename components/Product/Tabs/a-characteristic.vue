@@ -2,7 +2,7 @@
 const props = defineProps(['data'])
 </script>
 <template>
-  <div class="flex flex-col divide-y divide-neutral-big divide-dotted">
+  <div class="flex flex-col divide-y divide-neutral-600 divide-dotted">
     <div class="ch-row">
       <span>Страна производитель</span>
       <span class="font-semibold"> {{ data.StranaProishog }} 1</span>

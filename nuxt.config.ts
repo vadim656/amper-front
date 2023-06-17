@@ -44,8 +44,15 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/apollo',
-    '@nuxtjs/strapi'
+    '@nuxtjs/strapi',
+    'dayjs-nuxt'
   ],
+  dayjs: {
+    locales: ['ru'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'ru',
+    defaultTimezone: 'Russia/Moscow'
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -78,6 +85,7 @@ export default defineNuxtConfig({
       }
     }
   },
+
   build: {
     transpile: ['primevue']
   }

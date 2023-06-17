@@ -3,7 +3,7 @@ const runtimeConfig = useRuntimeConfig()
 const props = defineProps(['data'])
 </script>
 <template>
-  <div class="flex gap-2 border-b-[1px] border-neutral-big/50 py-3">
+  <div class="flex gap-2 border-b-[1px] border-neutral-600/50 py-3">
     <div class="flex items-center justify-between gap-2 w-full">
       <img
         v-if="props.data.attributes.Img.data.length == 0"

@@ -280,12 +280,12 @@ const resetFilters = () => {
     <button
       v-if="resetView"
       @click="resetFilters"
-      class="bg-white border-[1px] border-red/70 text-red/70 py-3 rounded-md hover:bg-red/70 hover:text-white anime"
+      class="bg-white border-[1px] border-red-700/70 text-red-700/70 py-3 rounded-md hover:bg-red-700/70 hover:text-white anime"
     >
       Сбросить
     </button>
     <button
-      class="bg-white border-[1px] border-red/70 text-red/70 py-3 rounded-md hover:bg-red/70 hover:text-white anime"
+      class="bg-white border-[1px] border-red-700/70 text-red-700/70 py-3 rounded-md hover:bg-red-700/70 hover:text-white anime"
     >
       Применить фильтры
     </button>

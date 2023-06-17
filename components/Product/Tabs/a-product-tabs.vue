@@ -5,21 +5,21 @@
     >
       <button
         @click="tab = 1"
-        :class="[tab == 1 ? 'text-red/70' : 'text-neutral-big']"
+        :class="[tab == 1 ? 'text-red-700/70' : 'text-neutral-600']"
         class=""
       >
         Описание
       </button>
       <button
         @click="tab = 2"
-        :class="[tab == 2 ? 'text-red/70' : 'text-neutral-big']"
+        :class="[tab == 2 ? 'text-red-700/70' : 'text-neutral-600']"
         class=""
       >
         Характеристики
       </button>
       <button
         @click="tab = 3"
-        :class="[tab == 3 ? 'text-red/70' : 'text-neutral-big']"
+        :class="[tab == 3 ? 'text-red-700/70' : 'text-neutral-600']"
         class=""
       >
         Отзывы

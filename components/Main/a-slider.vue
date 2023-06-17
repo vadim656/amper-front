@@ -64,7 +64,7 @@ const modelCheck = ref('')
             >{{ option2.text }}
           </option>
         </select> -->
-        <button class="text-white bg-red/70 w-full py-3 rounded-md">
+        <button class="text-white bg-red-700/70 w-full py-3 rounded-md">
           Подобрать
         </button>
       </div>
@@ -104,7 +104,7 @@ const modelCheck = ref('')
             >{{ option2.text }}
           </option>
         </select>
-        <button class="text-white bg-red/70 w-full py-3 rounded-md">Подобрать</button>
+        <button class="text-white bg-red-700/70 w-full py-3 rounded-md">Подобрать</button>
       </div>
     </div> -->
     <div class="row-span-2 col-span-3">

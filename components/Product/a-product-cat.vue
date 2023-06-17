@@ -41,7 +41,7 @@ const orderStars = computed(() => {
 </script>
 <template>
   <div
-    class="bg-white hover:shadow-xl anime flex flex-col justify-between items-center rounded-md border-[1px] border-white hover:border-neutral-big/50 p-4 gap-4"
+    class="bg-white hover:shadow-xl anime flex flex-col justify-between items-center rounded-md border-[1px] border-white hover:border-neutral-600/50 p-4 gap-4"
   >
     <div class="flex flex-col gap-2">
       <div>
@@ -105,13 +105,13 @@ const orderStars = computed(() => {
       <button
         v-if="orderStars.valData.length !== 0"
         @click="cart.AddCartItem(product_data)"
-        class="flex justify-center items-center bg-red/70 px-8 py-3 rounded-md cursor-pointer"
+        class="flex justify-center items-center bg-red-700/70 px-8 py-3 rounded-md cursor-pointer"
       >
         <img src="~/assets/img/icons/cartAdd.svg" alt="" />
       </button>
       <div
         v-else
-        class="flex justify-center items-center bg-red/30 px-8 py-3 rounded-md"
+        class="flex justify-center items-center bg-red-700/30 px-8 py-3 rounded-md"
       >
         <img src="~/assets/img/icons/cartAdd.svg" alt="" />
       </div>

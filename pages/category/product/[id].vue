@@ -96,10 +96,29 @@ const productID = computed(() => product.value?.product.data ?? {})
         </div>
         <div class="flex flex-col gap-8 col-span-2">
           <div
+            class="bg-white drop-shadow-xl rounded-md p-4 flex flex-col gap-4"
+          >
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-red-700/70 text-2xl"
+                >{{ productID.attributes.Price }} ₽</span
+              >
+              <span class="text-[#212121]/50"
+                >Код: {{ productID.attributes.Artikul }}</span
+              >
+            </div>
+            <div class="flex justify-between items-center">
+              <ButtonsAButtonRed @click-b="addCart(productID)">
+                <img src="~/assets/img/icons/cartAdd.svg" alt="" /> В корзину
+              </ButtonsAButtonRed>
+
+              <button class="flex justify-center w-full">В один клик</button>
+            </div>
+          </div>
+          <div
             class="flex flex-col gap-4 bg-white drop-shadow-xl rounded-md p-4"
           >
             <span class="text-sm font-bold">Наличие в магазинах:</span>
-            <div class="flex flex-col">
+            <div class="flex flex-col overflow-y-auto h-32">
               <ProductAProductsSity
                 :address="'Г. Изобильный, ул.Кирова, д.235Б'"
                 :stock="productID.attributes.Stock1"
@@ -162,26 +181,9 @@ const productID = computed(() => product.value?.product.data ?? {})
               />
             </div>
 
-            <button class="font-bold text-red/70">Показать все на карте</button>
-          </div>
-          <div
-            class="bg-white drop-shadow-xl rounded-md p-4 flex flex-col gap-4"
-          >
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-red/70 text-2xl"
-                >{{ productID.attributes.Price }} ₽</span
-              >
-              <span class="text-[#212121]/50"
-                >Код: {{ productID.attributes.Artikul }}</span
-              >
-            </div>
-            <div class="flex justify-between items-center">
-              <ButtonsAButtonRed @click-b="addCart(productID)">
-                <img src="~/assets/img/icons/cartAdd.svg" alt="" /> В корзину
-              </ButtonsAButtonRed>
-
-              <button class="flex justify-center w-full">В один клик</button>
-            </div>
+            <button class="font-bold text-red-700/70">
+              Показать все на карте
+            </button>
           </div>
         </div>
       </section>

@@ -68,3 +68,23 @@ export const useToastStore = defineStore('toast', {
     }
   }
 })
+
+export const useUser = defineStore('user', {
+  state: () => ({
+    userData: {}
+  }),
+  getters: {
+    getuserData: state => state.userData
+  },
+  actions: {
+    SetUserData (user) {
+      this.userData = user
+    },
+    logoutUserData () {
+      this.userData = {}
+    }
+  },
+  persist: {
+    storage: persistedState.localStorage
+  }
+})

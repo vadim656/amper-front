@@ -4,7 +4,7 @@ const runtimeConfig = useRuntimeConfig()
 </script>
 <template>
   <div class="container flex flex-col gap-8">
-    <h4 class="w-full flex justify-start font-bold text-2xl">Бренды</h4>
+    <h4 class="w-full flex justify-start font-bold text-2xl">Марки</h4>
     <div class="grid grid-cols-7 gap-4" v-if="marka">
       <div
         v-for="(item, i) in marka"

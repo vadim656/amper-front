@@ -10,7 +10,7 @@ const getLink = link => {
 <template>
   <div class="container flex flex-col gap-8">
     <h4 class="w-full flex justify-start font-bold text-2xl">
-      Каталог по маркам авто
+      Каталог
     </h4>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -18,7 +18,7 @@ const getLink = link => {
         @click="getLink(item.attributes.URL)"
         v-for="item in category"
         :key="item.id"
-        class="bg-white drop-shadow-xl hover:drop-shadow-2xl anime p-4 flex justify-between items-center rounded-md"
+        class="bg-white drop-shadow-xl hover:drop-shadow-2xl anime p-4 flex justify-between items-center rounded-md cursor-pointer"
       >
         <img
           v-if="item.attributes.IMG.data"
@@ -26,13 +26,13 @@ const getLink = link => {
             runtimeConfig.public.apiNot +
             item.attributes.IMG.data.attributes.url
           "
-          class="w-auto h-[70px]"
+          class="w-auto h-[60px]"
           alt=""
         />
         <img
           v-else
           :src="runtimeConfig.public.noPhoto"
-          class="w-auto h-[70px]"
+          class="w-auto h-[60px]"
           alt=""
         />
         <h3 class="font-semibold text-base text-right">

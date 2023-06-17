@@ -1,5 +1,5 @@
 <script setup>
-import { useSity, useCart } from '@/store'
+import { useSity, useCart, useUser } from '@/store'
 import { onClickOutside } from '@vueuse/core'
 import AModal from '../All/a-modal.vue'
 import ACartWrapper from '../Cart/a-cart-wrapper.vue'
@@ -7,7 +7,7 @@ import { SITY_ALL } from '~/gql/query/SITY_ALL.js'
 import { CATS_ALL } from '~/gql/query/CATS_ALL.js'
 
 const router = useRouter()
-// const { onLogout } = useApollo()
+const { onLogout } = useApollo()
 
 const { result: sities } = useQuery(SITY_ALL)
 const { result: categoriesAll, loading: catLoad } = useQuery(CATS_ALL)
@@ -21,6 +21,7 @@ const categoriesCom = computed(() => {
 
 const sity = useSity()
 const cart = useCart()
+const user = useUser()
 
 const modalCart = ref(false)
 
@@ -59,9 +60,22 @@ const closeCartEmit = () => {
 }
 
 function logout () {
-  // onLogout()
+  onLogout()
+  user.logoutUserData()
   router.push('/auth/login')
 }
+//openReZvon
+
+const openReZvon = ref(false)
+
+const tgZvonok = ref({
+  name: '',
+  phone: ''
+})
+const userModalRef = ref(null)
+const userModal = ref(false)
+
+onClickOutside(userModalRef, event => (userModal.value = false))
 </script>
 <template>
   <div class="flex flex-col">
@@ -71,15 +85,9 @@ function logout () {
           {{ sity.getSityName }}
         </div>
         <div class="flex gap-8">
-          <div class="flex gap-4">
+          <div class="flex gap-4 h-full items-center">
             <nuxt-link to="/">Корпоративным клиентам</nuxt-link>
             <nuxt-link to="/">Вакансии</nuxt-link>
-          </div>
-          <div class="flex gap-4">
-            <Nuxt-link to="/auth/login">Войти</Nuxt-link>
-            <button>Регистрация</button>
-            <span>user</span>
-            <button @click="logout">Выйти</button>
           </div>
         </div>
       </div>
@@ -89,20 +97,61 @@ function logout () {
         <nuxt-link to="/">LOGO</nuxt-link>
       </div>
       <div class="flex gap-4 items-center">
-        <nuxt-link class="font-bold text-red/70" to="/"
+        <nuxt-link class="font-bold text-red-700/70" to="/"
           >Указать автомобиль</nuxt-link
         >
-        <nuxt-link class="font-bold" to="/">Связаться с нами</nuxt-link>
+        <button class="font-bold" @click="openReZvon = !openReZvon">
+          Связаться с нами
+        </button>
         <!-- <button class="flex gap-2 items-center">
           <span>Избранное</span>
           <img src="~/assets/img/icons/izbrannoe.svg" alt="" />
           <span>0</span>
         </button> -->
-        <button @click="modalCart = !modalCart" class="flex gap-2 items-center ml-12">
-          <span>Корзина </span>
+        <button
+          @click="router.push('/cart')"
+          class="flex gap-2 items-center ml-12 p-2 bg-neutral-200 rounded-md cursor-pointer"
+        >
           <img src="~/assets/img/icons/cart.svg" alt="" />
           <span>{{ cart.getCart.length }}</span>
         </button>
+        <div class="flex gap-4 relative">
+          <button
+            @click="userModal = !userModal"
+            class="p-2 bg-neutral-200 rounded-md cursor-pointer"
+          >
+            <IconsIUser />
+          </button>
+
+          <div
+            ref="userModalRef"
+            v-if="userModal == true"
+            class="absolute top-10 right-0 bg-white drop-shadow-xl p-4 rounded-md z-[999] w-48"
+          >
+            <div class="flex flex-col items-start gap-3 w-full">
+              <Nuxt-link
+                v-if="!Object.keys(user.getuserData).length"
+                to="/auth/login"
+                >Войти</Nuxt-link
+              >
+              <button v-if="!Object.keys(user.getuserData).length">
+                Регистрация
+              </button>
+              <span
+                @click="router.push('/lk')"
+                v-if="Object.keys(user.getuserData).length"
+                class="cursor-pointer"
+                >Личный кабинет</span
+              >
+              <button
+                v-if="Object.keys(user.getuserData).length"
+                @click="logout"
+              >
+                Выйти
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- modal cart -->
       <a-cart-wrapper
@@ -119,7 +168,7 @@ function logout () {
         <div class="relative">
           <button
             @click="catalogView = !catalogView"
-            class="flex gap-2 items-center justify-center px-14 py-4 bg-red/70"
+            class="flex gap-2 items-center justify-center px-14 py-4 bg-red-700/70"
           >
             <img src="~/assets/img/icons/catalog.svg" alt="" />
             <span class="text-white font-bold">Каталог</span>
@@ -143,7 +192,7 @@ function logout () {
             </div>
           </div>
         </div>
-        <HeaderASearchWrapper />        
+        <HeaderASearchWrapper />
       </div>
     </div>
     <!-- modal sity -->
@@ -161,6 +210,35 @@ function logout () {
         </ul>
       </div>
     </a-modal>
+    <Dialog
+      v-model:visible="openReZvon"
+      modal
+      header="Обратный звонок"
+      class="w-full max-w-[320px]"
+    >
+      <div class="flex flex-col gap-6 pt-6">
+        <span class="p-float-label">
+          <InputText
+            id="username"
+            v-model="tgZvonok.name"
+            class="text-sm !placeholder:text-sm"
+          />
+          <label for="username">Имя</label>
+        </span>
+        <span class="p-float-label">
+          <InputMask
+            id="ssn"
+            v-model="tgZvonok.phone"
+            mask="+7(999)-999-99-99"
+            placeholder="+7(___)-___-__-__"
+          />
+          <label for="ssn">Телефон</label>
+        </span>
+        <div>
+          <button class="btn-default w-full">Отправить</button>
+        </div>
+      </div>
+    </Dialog>
   </div>
 </template>
 

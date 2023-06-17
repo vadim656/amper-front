@@ -10,12 +10,6 @@ module.exports = {
   theme: {
     container: {
       center: true
-    },
-    colors: {
-      red: '#BB1E10',
-      white: '#FFFFFF',
-      neutral: '#EEEEEE',
-      'neutral-big': '#47555F'
     }
   },
   plugins: []

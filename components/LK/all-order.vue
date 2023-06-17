@@ -5,12 +5,6 @@
       <div></div>
       <div class="w-full">
         <DataTable :value="dataResultsCom" showGridlines class="w-full">
-          <template #header>
-            <div class="w-full flex items-center justify-between gap-2">
-              <span class="text-xl text-900 font-bold">Заказы</span>
-              <Button icon="pi pi-refresh" rounded raised />
-            </div>
-          </template>
           <Column header="Заказ" headerStyle="width:10rem">
             <template #body="slotProps">
               <span class="text-sm">
@@ -18,10 +12,10 @@
               >
             </template>
           </Column>
-          <Column header="Дата">
+          <Column header="Дата" class="!w-[2%]">
             <template #body="slotProps">
-              <div class="flex items-center gap-2">
-                <span>2</span>
+              <div class="flex items-center gap-2 text-sm">
+                <span>{{ timeDay(slotProps.data.attributes.createdAt) }}</span>
               </div>
             </template>
           </Column>
@@ -36,7 +30,6 @@
                     class="py-2"
                   >
                     <div class="flex flex-col gap-1">
-                     
                       <span class="text-sm">
                         {{ item.Value }} x
                         {{ item.tovary.data.attributes.Name }}
@@ -65,9 +58,17 @@
           <Column header="Статус">
             <template #body="slotProps">
               <div class="flex items-center gap-2 text-xs">
-                <span v-if="slotProps.data.attributes.Status == 'pending'">В обработке</span>
-                <span v-else-if="slotProps.data.attributes.Status == 'complete'" class="text-green-500">Завершен</span>
-                <span v-else-if="slotProps.data.attributes.Status == 'error'">Отменен</span>
+                <span v-if="slotProps.data.attributes.Status == 'pending'"
+                  >Обработка</span
+                >
+                <span
+                  v-else-if="slotProps.data.attributes.Status == 'complete'"
+                  class="text-green-500"
+                  >Завершен</span
+                >
+                <span v-else-if="slotProps.data.attributes.Status == 'error'"
+                  >Отменен</span
+                >
               </div>
             </template>
           </Column>
@@ -78,7 +79,6 @@
         </DataTable>
       </div>
     </div>
-    <pre>{{ dataResultsCom }}</pre>
   </div>
 </template>
 
@@ -86,15 +86,20 @@
 import { useUser } from '@/store'
 import { ALL_ORDERS } from '@/gql/LK'
 
-
 const user = useUser()
+const dayjs = useDayjs()
+
+const timeDay = t => {
+  return dayjs(t).format('DD.MM.YYYY')
+}
 
 const { result: dataResults } = useQuery(ALL_ORDERS, () => ({
   ID: user.userData.id
 }))
 
 const dataResultsCom = computed(
-  () => dataResults.value?.usersPermissionsUser.data.attributes.orders.data ?? []
+  () =>
+    dataResults.value?.usersPermissionsUser.data.attributes.orders.data ?? []
 )
 
 const resultSumm = data => {

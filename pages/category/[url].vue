@@ -132,7 +132,7 @@ onMounted(() => {
         class="col-span-10 min-h-screen"
       ></Skeleton>
     </div>
-    <div class="container grid grid-cols-12 gap-4" v-else>
+    <div class="container grid grid-cols-9 gap-4" v-else>
       <UITheBreadcams
         :title="
           dataProducts.products.data[0].attributes.kategorii_tovarovs.data[0]
@@ -166,8 +166,8 @@ onMounted(() => {
                   @click="pageSize.val = 10"
                   :class="[
                     pageSize.val == 10
-                      ? 'border-red text-red'
-                      : 'border-neutral-big/50 text-neutral-big/50'
+                      ? 'border-red-600 text-red-600'
+                      : 'border-neutral-600/50 text-neutral-600/50'
                   ]"
                   class="border-2 rounded-md cursor-pointer text-sm w-10 h-10 flex justify-center items-center"
                   >10</span
@@ -176,8 +176,8 @@ onMounted(() => {
                   @click="pageSize.val = 20"
                   :class="[
                     pageSize.val == 20
-                      ? 'border-red text-red'
-                      : 'border-neutral-big/50 text-neutral-big/50'
+                      ? 'border-red-600 text-red-600'
+                      : 'border-neutral-600/50 text-neutral-600/50'
                   ]"
                   class="border-2 rounded-md cursor-pointer text-sm w-10 h-10 flex justify-center items-center"
                   >20</span
@@ -186,8 +186,8 @@ onMounted(() => {
                   @click="pageSize.val = 40"
                   :class="[
                     pageSize.val == 40
-                      ? 'border-red text-red'
-                      : 'border-neutral-big/50 text-neutral-big/50'
+                      ? 'border-red-600 text-red-600'
+                      : 'border-neutral-600/50 text-neutral-600/50'
                   ]"
                   class="border-2 rounded-md cursor-pointer text-sm w-10 h-10 flex justify-center items-center"
                   >40</span
@@ -230,7 +230,7 @@ onMounted(() => {
       <CategoryASidebar class="col-span-2" />
       <Transition name="fade" appear mode="out-in">
         <div
-          class="col-span-10 grid grid-cols-5 gap-4"
+          class="col-span-7 grid grid-cols-4 gap-4"
           v-if="productType.val == 'grid'"
         >
           <ProductAProductCat
@@ -266,7 +266,7 @@ onMounted(() => {
               :key="pag"
               @click="pageCount.val = pag"
               class="font-semibold text-white rounded-full flex justify-center items-center w-10 h-10 cursor-pointer"
-              :class="[pageCount.val == pag ? 'bg-red/70' : 'bg-red/20']"
+              :class="[pageCount.val == pag ? 'bg-red-600/70' : 'bg-red-600/20']"
             >
               {{ pag }}
             </li>
@@ -274,7 +274,7 @@ onMounted(() => {
             <li
               @click="pageCount.val = allPages"
               class="font-semibold text-white rounded-full flex justify-center items-center w-10 h-10 cursor-pointer"
-              :class="[pageCount.val == allPages ? 'bg-red/70' : 'bg-red/20']"
+              :class="[pageCount.val == allPages ? 'bg-red-600/70' : 'bg-red-600/20']"
             >
               {{ allPages }}
             </li>

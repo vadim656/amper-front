@@ -25,7 +25,7 @@ function linkCatalog (id) {
     <input
       type="text"
       v-model="searchInput"
-      class="block p-2 w-full min-w-[320px] sm:min-w-[600px] border-[#212121]/20 text-red-900 placeholder-red-300 focus:outline-none sm:text-sm rounded-md"
+      class="block p-2 w-full min-w-[320px] sm:min-w-[600px] border-[#212121]/20 text-red-700-900 placeholder-red-700-300 focus:outline-none sm:text-sm rounded-md"
       placeholder="Поиск по сайту"
     />
     <div
@@ -68,7 +68,7 @@ function linkCatalog (id) {
           >
         </div>
         <button
-          class="p-4 font-semibold bg-red/70 hover:bg-red/90 anime text-white"
+          class="p-4 font-semibold bg-red-700/70 hover:bg-red-700/90 anime text-white"
         >
           Показать все товары
         </button>

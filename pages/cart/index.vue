@@ -9,7 +9,7 @@
           <template #body="slotProps">
             <div class="flex flex-col items-start gap-2">
               <span>{{ slotProps.data.attributes.Name }}</span>
-              <span class="text-neutral-big text-xs"
+              <span class="text-neutral-600 text-xs"
                 >Арт: {{ slotProps.data.attributes.Artikul }}</span
               >
             </div>
@@ -53,7 +53,7 @@
           <template #body="slotProps">
             <div class="flex items-center gap-2">
               <button @click="deleteFromCart(slotProps.data.id)">
-                <IconsIDelete class="w-5 h-5 text-red" />
+                <IconsIDelete class="w-5 h-5 text-red-700" />
               </button>
             </div>
           </template>
@@ -74,7 +74,7 @@
                 <span class="text-xs">{{ activeStore }}</span>
                 <button
                   @click="visibleSity = !visibleSity"
-                  class="text-red/70 text-sm"
+                  class="text-red-700/70 text-sm"
                 >
                   Изменить адрес
                 </button>
@@ -274,10 +274,10 @@
         <div class="flex justify-between items-center font-bold">
           <div class="flex gap-4 items-center font-bold">
             <span class="text-2xl">Итого:</span>
-            <span class="text-2xl text-red/70">{{ summPriceCart }} ₽</span>
+            <span class="text-2xl text-red-700/70">{{ summPriceCart }} ₽</span>
           </div>
 
-          <button class="bg-red/70 p-3 rounded-md text-white">
+          <button class="bg-red-700/70 p-3 rounded-md text-white">
             Оформить заказ
           </button>
         </div>

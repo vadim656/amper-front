@@ -15,6 +15,7 @@ export const ALL_ORDERS = gql`
                 Downloaded1C
                 ID_Store
                 UID
+                createdAt
                 Status
                 ... on Order {
                   OrderProductComponent {

@@ -13,10 +13,14 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row'; 
 import Dialog from 'primevue/dialog';
+import InputMask from 'primevue/inputmask';
+import ConfirmPopup from 'primevue/confirmpopup';
+import ConfirmationService from 'primevue/confirmationservice';
 
 export default defineNuxtPlugin(nuxtApp => {
     nuxtApp.vueApp.use(PrimeVue, { ripple: true })
     nuxtApp.vueApp.use(ToastService)
+    nuxtApp.vueApp.use(ConfirmationService)
     nuxtApp.vueApp.component('Button', Button)
     nuxtApp.vueApp.component('InputText', InputText),
     nuxtApp.vueApp.component('InputNumber', InputNumber)
@@ -30,5 +34,7 @@ export default defineNuxtPlugin(nuxtApp => {
     nuxtApp.vueApp.component('ColumnGroup', ColumnGroup)
     nuxtApp.vueApp.component('Row', Row)
     nuxtApp.vueApp.component('Dialog', Dialog)
+    nuxtApp.vueApp.component('InputMask', InputMask)
+    nuxtApp.vueApp.component('ConfirmPopup', ConfirmPopup)
     //other components that you need
 })
