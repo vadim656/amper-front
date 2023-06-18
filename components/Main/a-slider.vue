@@ -25,29 +25,40 @@ const modelCheck = ref('')
     <div
       class="row-span-1 bg-white drop-shadow-xl rounded-md p-4 flex flex-col justify-center items-start gap-4"
     >
-      <span class="mb-4  font-bold text-base"
+      <span class="mb-4 font-bold text-base"
         >Подбор аккумулятора для авто
       </span>
       <div class="flex flex-wrap gap-4">
-        <select
+        <Dropdown
           v-model="markaCheck"
-          class=" bg-[#EEEEEE] rounded-md cursor-pointer"
+          :options="marka"
+          optionLabel=""
+          placeholder="Марка"
+          class="w-full md:w-14rem"
+        />
+        <Dropdown
+          v-model="modelCheck"
+          :options="model"
+          optionLabel=""
+          placeholder="Модель"
+          class="w-full md:w-14rem"
+        />
+        <!-- <select
+          v-model="markaCheck"
+          class="bg-[#EEEEEE] rounded-md cursor-pointer"
         >
-          <option v-for="(option1, i) in marka" v-bind:value="option1" :key="i"
-            >{{ option1 }}
+          <option v-for="(option1, i) in marka" v-bind:value="option1" :key="i">
+            {{ option1 }}
           </option>
         </select>
         <select
           v-model="modelCheck"
-          class=" bg-[#EEEEEE] rounded-md cursor-pointer"
+          class="bg-[#EEEEEE] rounded-md cursor-pointer"
         >
-          <option
-            v-for="(option3, i) in model"
-            v-bind:value="option3"
-            :key="i"
-            >{{ option3 }}
-          </option></select
-        >
+          <option v-for="(option3, i) in model" v-bind:value="option3" :key="i">
+            {{ option3 }}
+          </option>
+        </select> -->
         <!-- <select v-model="selectedYear" class=" bg-[#EEEEEE] rounded-md cursor-pointer">
           <option
             v-for="(option4, i) in optionsYear"

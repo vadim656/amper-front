@@ -5,7 +5,8 @@ import AModal from '../All/a-modal.vue'
 import ACartWrapper from '../Cart/a-cart-wrapper.vue'
 import { SITY_ALL } from '~/gql/query/SITY_ALL.js'
 import { CATS_ALL } from '~/gql/query/CATS_ALL.js'
-
+import { useToast } from 'primevue/usetoast'
+const toast = useToast()
 const router = useRouter()
 const { onLogout } = useApollo()
 
@@ -76,16 +77,58 @@ const userModalRef = ref(null)
 const userModal = ref(false)
 
 onClickOutside(userModalRef, event => (userModal.value = false))
+
+async function sentTg () {
+  const fullMessege =
+    `Обратный звонок` +
+    '%0A%0A' +
+    `Город: ${sity.getSityName}` +
+    '%0A' +
+    'Телефон:  ' +
+    tgZvonok.value.phone +
+    '%0A' +
+    'Имя: ' +
+    tgZvonok.value.name
+
+  await fetch(
+    `https://api.telegram.org/bot5834903514:AAESb1mV_RxEptR9_RqHGbGdbGujiTSZTXI/sendMessage?chat_id=-1001942657879&text=${fullMessege}&parse_mode=html`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'cache-control': 'no-cache'
+      }
+    }
+  ).then(res => {
+    if (res.status == '200') {
+      openReZvon.value = false
+      setTimeout(() => {
+        toast.add({
+          severity: 'success',
+          summary: 'Успешно',
+          detail: `Спасибо, мы Вам перезвоним!`,
+          life: 3000
+        })
+      }, 200)
+    }
+    console.log(res)
+  })
+}
 </script>
 <template>
   <div class="flex flex-col">
+    <Toast />
     <div class="bg-[#EAEAEA]">
       <div class="container flex justify-between items-center h-10">
-        <div @click="modalSity = true" class="cursor-pointer">
+        <div
+          @click="modalSity = true"
+          class="cursor-pointer flex items-center gap-1 text-sm"
+        >
+          <IconsIMap />
           {{ sity.getSityName }}
         </div>
         <div class="flex gap-8">
-          <div class="flex gap-4 h-full items-center">
+          <div class="flex gap-4 h-full items-center text-sm">
             <nuxt-link to="/">Корпоративным клиентам</nuxt-link>
             <nuxt-link to="/">Вакансии</nuxt-link>
           </div>
@@ -110,7 +153,7 @@ onClickOutside(userModalRef, event => (userModal.value = false))
         </button> -->
         <button
           @click="router.push('/cart')"
-          class="flex gap-2 items-center ml-12 p-2 bg-neutral-200 rounded-md cursor-pointer"
+          class="flex gap-2 items-center ml-12 p-2 bg-white rounded-md cursor-pointer"
         >
           <img src="~/assets/img/icons/cart.svg" alt="" />
           <span>{{ cart.getCart.length }}</span>
@@ -118,7 +161,7 @@ onClickOutside(userModalRef, event => (userModal.value = false))
         <div class="flex gap-4 relative">
           <button
             @click="userModal = !userModal"
-            class="p-2 bg-neutral-200 rounded-md cursor-pointer"
+            class="p-2 bg-white rounded-md cursor-pointer"
           >
             <IconsIUser />
           </button>
@@ -235,7 +278,9 @@ onClickOutside(userModalRef, event => (userModal.value = false))
           <label for="ssn">Телефон</label>
         </span>
         <div>
-          <button class="btn-default w-full">Отправить</button>
+          <button @click="sentTg()" class="btn-default w-full">
+            Отправить
+          </button>
         </div>
       </div>
     </Dialog>

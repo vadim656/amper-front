@@ -277,7 +277,10 @@
             <span class="text-2xl text-red-700/70">{{ summPriceCart }} ₽</span>
           </div>
 
-          <button class="bg-red-700/70 p-3 rounded-md text-white">
+          <button
+            @click="createOrder()"
+            class="bg-red-700/70 p-3 rounded-md text-white"
+          >
             Оформить заказ
           </button>
         </div>
@@ -342,7 +345,7 @@
 
 <script setup>
 import TheBreadcams from '@/components/UI/TheBreadcams.vue'
-import { useCart } from '@/store'
+import { useCart, useSity } from '@/store'
 import { CART_SITYES } from '@/gql/query/CART'
 
 const cart = useCart()
@@ -387,6 +390,75 @@ const { result: dataProducts, loading: dataProductsLoading } =
 
 const allSity = computed(() => dataProducts.value?.sities.data ?? [])
 
+const sity = useSity()
+
+function createOrder () {
+  sentTg(cart.cart)
+}
+
+async function sentTg (data) {
+  let order = ''
+  data.forEach(element => {
+    order =
+      order +
+      'Арт - ' +
+      element.attributes.Artikul +
+      '%0A' +
+      'Наименование - ' +
+      element.attributes.Name +
+      '%0A' +
+      'Кол-во - ' +
+      element.colVo +
+      '%0A%0A'
+    console.log(element.attributes.Name)
+  })
+  console.log('create')
+  const fullMessege =
+    `Заказ %` +
+    '%0A%0A' +
+    `Город: ${sity.getSityName}` +
+    '%0A' +
+    // 'Телефон:  ' +
+    // tgZvonok.value.phone +
+    // '%0A' +
+    // 'Имя: ' +
+    // tgZvonok.value.name +
+    // '%0A%0A' +
+    'Содержание: ' +
+    '%0A%0A' +
+    order +
+    '%0A%0A' +
+    'Сумма: ' +
+    summPriceCart.value
+
+  console.log(fullMessege)
+  ''(
+    await fetch(
+      `https://api.telegram.org/bot5834903514:AAESb1mV_RxEptR9_RqHGbGdbGujiTSZTXI/sendMessage?chat_id=-1001942657879&text=${fullMessege}&parse_mode=html`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'cache-control': 'no-cache'
+        }
+      }
+    ).then(res => {
+      if (res.status == '200') {
+        openReZvon.value = false
+        setTimeout(() => {
+          toast.add({
+            severity: 'success',
+            summary: 'Успешно',
+            detail: `Спасибо, мы Вам перезвоним!`,
+            life: 3000
+          })
+        }, 200)
+      }
+      console.log(res)
+    })
+  )
+}
+
 // запрос на создание заказа
 
 // {
@@ -422,8 +494,6 @@ const allSity = computed(() => dataProducts.value?.sities.data ?? [])
   width: 60px;
 }
 .p-button {
- 
   border: none !important;
-  
 }
 </style>
