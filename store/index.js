@@ -10,7 +10,7 @@ export const useSity = defineStore('sity', {
     getSityId: state => state.id
   },
   actions: {
-    SetSityData (item) {
+    SetSityData(item) {
       this.sity = item.attributes.Name
       this.id = item.id
     }
@@ -25,17 +25,18 @@ export const useCart = defineStore('cart', {
     cart: []
   }),
   getters: {
-    getCart: state => state.cart
+    getCart: state => state.cart,
+    getCartIDs: state => state.cart.map(x => x.id)
   },
   actions: {
-    AddCartItem (product) {
+    AddCartItem(product) {
       const productReq = {
         ...product,
         colVo: 1
       }
       this.cart.push(productReq)
     },
-    changeColItem (i, num) {
+    changeColItem(i, num) {
       const items = this.cart
       let element = i
       let indices = {}
@@ -46,7 +47,7 @@ export const useCart = defineStore('cart', {
       }
       this.cart[indices].colVo = num
     },
-    deleteItem (id) {
+    deleteItem(id) {
       this.cart = this.cart.filter(x => x.id !== id)
     }
   },
@@ -63,7 +64,7 @@ export const useToastStore = defineStore('toast', {
     getToast: state => state.toast
   },
   actions: {
-    AddToast (message) {
+    AddToast(message) {
       this.toast.push(message)
     }
   }
@@ -77,10 +78,10 @@ export const useUser = defineStore('user', {
     getuserData: state => state.userData
   },
   actions: {
-    SetUserData (user) {
+    SetUserData(user) {
       this.userData = user
     },
-    logoutUserData () {
+    logoutUserData() {
       this.userData = {}
     }
   },

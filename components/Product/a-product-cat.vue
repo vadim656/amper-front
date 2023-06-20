@@ -10,11 +10,7 @@ function goToProduct (params) {
     params.attributes.kategorii_tovarovs.data[0].attributes.URL
   )
   router.push({
-    path:
-      '/category/product/' +
-      // params.attributes.kategorii_tovarovs.data[0].attributes.URL +
-      // '/' +
-      params.id
+    path: '/category/product/' + params.id
   })
 }
 
@@ -38,6 +34,11 @@ const orderStars = computed(() => {
 
   return { list, sumWithInitial, valData }
 })
+
+const isCart = id => {
+  // console.log(cart.getCartIDs.includes(id));
+  return cart.getCartIDs.includes(id)
+}
 </script>
 <template>
   <div
@@ -97,13 +98,18 @@ const orderStars = computed(() => {
 
     <div class="flex justify-between items-center w-full">
       <span class="text-base font-bold">
-        {{
-          props.product_data.attributes.Price.toLocaleString('ru-RU')
-        }}
+        {{ props.product_data.attributes.Price.toLocaleString('ru-RU') }}
         ₽</span
       >
-      <button
+      <!-- <button
         v-if="orderStars.valData.length !== 0"
+        @click="cart.AddCartItem(product_data)"
+        class="flex justify-center items-center bg-red-700/70 px-8 py-3 rounded-md cursor-pointer"
+      >
+        <img src="~/assets/img/icons/cartAdd.svg" alt="" />
+      </button> -->
+      <button
+        v-if="isCart(props.product_data.id) !== true"
         @click="cart.AddCartItem(product_data)"
         class="flex justify-center items-center bg-red-700/70 px-8 py-3 rounded-md cursor-pointer"
       >
@@ -111,9 +117,9 @@ const orderStars = computed(() => {
       </button>
       <div
         v-else
-        class="flex justify-center items-center bg-red-700/30 px-8 py-3 rounded-md"
+        class="flex justify-center items-center bg-red-700/50 px-8 py-3 rounded-md"
       >
-        <img src="~/assets/img/icons/cartAdd.svg" alt="" />
+        <IconsICheck class="w-6 h-6 text-white"/>
       </div>
     </div>
   </div>
